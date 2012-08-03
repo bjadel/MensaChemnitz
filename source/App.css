@@ -1,0 +1,103 @@
+/*
+	Put anything you reference with "url()" in ../assets/
+	This way, you can minify your application, and just remove the "source" folder for production
+*/
+#app {
+	
+}
+
+.app > * {
+	box-shadow: -4px -4px 4px rgba(0,0,0,0.3);
+	background: #555;
+	width: 320px;		
+}
+
+.left {
+	color: white;
+}
+
+.item {
+	position: relative;
+	border-bottom: 1px solid #0E0E0E;
+	padding: 16px 12px;
+	background-color: #333333;
+}
+
+.item.onyx-selected {
+	background-color: #226B9A;
+}
+
+.panels {
+	min-height: 320px;
+	min-width: 320px;
+}
+
+.panels > * {
+	border: 2px solid #333;
+	font-size: 5em;
+	text-align: center;
+}
+
+.wide > * {
+	min-width: 50%;
+}
+
+.collapsible > * {
+	min-width: 250px;
+}
+
+#app_foodlist_image {
+}
+
+#app_foodlist_description {
+	padding: 10px;
+	width: 250px;
+}
+
+#app_foodlist_description #app_foodlist_name {
+	font-weight: bolder;
+}
+
+#app_foodlist_description #app_foodlist_foodItemDescription {
+}
+
+div#app_food {
+	background: url(../assets/tablet.png) center center no-repeat;
+}
+
+#app_food_foodPicture {
+	position: absolute;
+   	left: 50%;
+   	top: 50%;
+   	width: 190px; /* Breite des Elements */
+   	height: 190px; /* Höhe des Elements */
+   	margin-left: -120px; /* Breite des Elements geteilt durch zwei! */
+   	margin-top: -95px; /* Höhe des Elements geteilt durch zwei! */
+}
+
+div#app_food_foodname {
+	font: normal normal normal 16px/18px Purisa, Helvetica, Arial, sans-serif;
+	position: relative; 
+	top: 20px;
+	width: 80%; 
+	min-height: 30px; 
+	margin: 5px auto; 
+	padding: 15px; 
+	background: #f1f3a2; 
+	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(247,247,210,1)), to(rgba(240,242,155,1)));
+	background: -moz-linear-gradient(top,  rgba(247,247,210,1), rgba(240,242,155,1)); /* for firefox 3.6+ */ 
+	
+	 
+	box-shadow: 0 2px 12px rgb(0,0,0);
+	box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 2px 12px rgba(0,0,0,0.5); /* Mozilla Firefox */
+	-webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.5); /* Chrome */
+	box-shadow: 0 1px 2px #000; 
+	-webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+}
+div#app_food_foodname div#app_food_foodtitle {
+	font: normal normal normal 24px/24px Purisa, Helvetica, Arial, sans-serif;
+}

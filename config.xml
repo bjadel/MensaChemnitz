@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+xmlns:gap = "http://phonegap.com/ns/1.0"
+id = "org.bja.mensa.chemnitz"
+version = "0.1.1">
+	<name>Mensa Chemnitz</name>
+	
+	<description>
+		Showing canteen menu of the TU Chemnitz.
+	</description>
+	
+	<author href="http://dev.adelberg-online.de" email="bjawebos@adelberg-online.de">
+		Björn Adelberg
+	</author>
+	<icon src="assets/crossplatform/icon_72.png" width="72" height="72" />
+	<icon src="assets/crossplatform/icon_48.png" width="48" height="48" />
+	<icon src="assets/crossplatform/icon_36.png" width="36" height="36" />
+	<preference name="permissions" value="none"/>
+</widget>
