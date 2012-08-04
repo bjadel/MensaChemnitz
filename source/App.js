@@ -62,7 +62,7 @@ enyo.kind({
     	var foodEntry =  FoodModel.getFoodByIndex(inFood.index);
     	this.$.food.setFood(foodEntry);
     },
-    mensaItemSelected: function(inSender, inCanteen) {
+    canteenItemSelected: function(inSender, inCanteen) {
     	CanteenModel.setCanteen(inCanteen.content);
     	this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
     	this.refresh();
