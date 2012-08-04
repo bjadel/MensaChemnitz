@@ -1,0 +1,14 @@
+enyo.depends(
+	"$lib/layout",
+	"$lib/onyx",
+	"App.css",
+	"App.js",
+	"Food.js",
+	"FoodList.js",
+	"model/FoodModel.js",
+	"model/CanteenModel.js",
+	"model/CanteenService.js",
+	"model/DateModel.js",
+	"model/ReichenhainerCanteen.js",
+	"model/StraNaCanteen.js"
+);
