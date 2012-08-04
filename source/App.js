@@ -11,7 +11,8 @@ enyo.kind({
 	components: [
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
-				{name: "title", content: "Chemnitz"}
+				{name: "title", content: "Chemnitz", style: "width: 90%;"},
+				{name: "grabPicture", kind: "Image", src: "lib/onyx/images/grabbutton.png"}
 			]},
 			{kind: "FittableColumns", components: [
 				{kind: "onyx.MenuDecorator", fit: "true", onSelect: "canteenItemSelected", components: [ 
