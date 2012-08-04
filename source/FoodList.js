@@ -20,11 +20,12 @@ enyo.kind({
 				{name: "item", classes: "item", ontap: "itemTap", components: [
 					{name: "index", classes: "list-sample-index"},
 					{kind: "FittableColumns", components: [
-						{name:"image", components: [ {name: "foodImage", kind: "Image", style: "width: 65px; height: 65px;", src: "assets/0.png"} ]},
+						{name:"image", components: [ {name: "foodImage", kind: "Image", style: "width: 70px; height: 70px;", src: "assets/0.png"} ]},
 						{name: "description", components: [ 
 							{kind: "FittableRows", components: [
 								{name: "name"},
-								{name: "foodItemDescription"}
+								{name: "foodItemDescription"},
+								{name: "foodItemFeeList"}
 							]} 
 						]}
 					]}
@@ -62,10 +63,17 @@ enyo.kind({
 		this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(i)); 
 		if (foodEntry) {
 			if (foodEntry.isPictureAvailable) {
-				this.$.foodImage.setSrc("http://www-user.tu-chemnitz.de/~fnor/speiseplan/bilder_190/"+foodEntry.pictureKey+".png");
+				if (foodEntry.pictureKey != "") {
+					this.$.foodImage.setSrc("http://www-user.tu-chemnitz.de/~fnor/speiseplan/bilder_190/"+foodEntry.pictureKey+".png");
+				}
 			}
+			// category
 			this.$.name.setContent(foodEntry.category);
+			// description
 			this.$.foodItemDescription.setContent(foodEntry.description);
+			// fee
+			var feeList = "S: "+foodEntry.feeStudent.replace("?", "€")+" M: "+foodEntry.feeEmployee.replace("?", "€")+" G: "+foodEntry.feeGuest.replace("?", "€");
+			this.$.foodItemFeeList.setContent(feeList);
 			return true;
 		} else {
 			this.$.name.setContent("");

@@ -12,7 +12,13 @@ enyo.kind({
 				{name: "foodtitle"},
 				{name: "description"}
 			]},
-			{name: "foodPicture", kind: "Image", src: "assets/0.png", style: "width: 190px;"}
+			{name: "foodPicture", kind: "Image", src: "assets/0.png", style: "width: 190px;"},
+			{name: "foodFee", components: [
+				{name: "feeTitle", content: "Canteen Fees"},
+				{name: "feeStudent"},
+				{name: "feeEmployee"},
+				{name: "feeGuest"}
+			]}
 		]}
 	],
 	addControl: function(inControl) {
@@ -22,7 +28,12 @@ enyo.kind({
 		this.$.foodtitle.setContent(inFood.category);
 		this.$.description.setContent(inFood.description);
 		if (inFood.isPictureAvailable) {
-			this.$.foodPicture.setSrc("http://www-user.tu-chemnitz.de/~fnor/speiseplan/bilder_190/"+inFood.pictureKey+".png");
+			if (inFood.pictureKey != "") {
+				this.$.foodPicture.setSrc("http://www-user.tu-chemnitz.de/~fnor/speiseplan/bilder_190/"+inFood.pictureKey+".png");
+			}
 		}
+		this.$.feeStudent.setContent("Students: " + inFood.feeStudent.replace("?", "€"));
+		this.$.feeEmployee.setContent("Employees: " + inFood.feeEmployee.replace("?", "€"));
+		this.$.feeGuest.setContent("Guests: " + inFood.feeGuest.replace("?", "€"));
 	}
 });

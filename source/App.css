@@ -61,6 +61,11 @@
 #app_foodlist_description #app_foodlist_foodItemDescription {
 }
 
+#app_foodlist_description #app_foodlist_foodItemFeeList {
+	font-family: monospace;
+	font-size: smaller;
+}
+
 div#app_food {
 	background: url(../assets/tablet.png) center center no-repeat;
 }
@@ -97,5 +102,31 @@ div#app_food_foodname {
     transform: rotate(-3deg);
 }
 div#app_food_foodname div#app_food_foodtitle {
+	font: normal normal normal 24px/24px Purisa, Helvetica, Arial, sans-serif;
+}
+
+div#app_food_foodFee {
+	font: normal normal normal 16px/18px Purisa, Helvetica, Arial, sans-serif;
+	position: absolute; 
+	top: 70%;
+	left: 35%;
+	width: 210px; 
+	min-height: 30px; 
+	margin: 5px auto; 
+	padding: 15px; 
+	background: #f1f3a2; 
+	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(247,247,210,1)), to(rgba(240,242,155,1)));
+	background: -moz-linear-gradient(top,  rgba(247,247,210,1), rgba(240,242,155,1)); /* for firefox 3.6+ */ 
+	box-shadow: 0 2px 12px rgb(0,0,0);
+	box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 2px 12px rgba(0,0,0,0.5); /* Mozilla Firefox */
+	-webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.5); /* Chrome */
+	box-shadow: 0 1px 2px #000; 
+	-webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    transform: rotate(7deg);
+}
+div#app_food_foodFee div#app_food_feeTitle {
 	font: normal normal normal 24px/24px Purisa, Helvetica, Arial, sans-serif;
 }
