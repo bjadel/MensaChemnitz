@@ -10,5 +10,6 @@ enyo.depends(
 	"model/CanteenService.js",
 	"model/DateModel.js",
 	"model/ReichenhainerCanteen.js",
-	"model/StraNaCanteen.js"
+	"model/StraNaCanteen.js",
+	"model/AppModel.js"
 );

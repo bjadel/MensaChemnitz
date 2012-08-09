@@ -46,7 +46,22 @@
 	min-width: 250px;
 }
 
+.onyx-sample-popup { 
+	font-size: 30px; text-align: center; 
+}
+
+.onyx-scrim.onyx-scrim-transparent {
+	background: transparent;
+	background: rgba(0,0,0,0.6);
+}
+
 #app_foodlist_image {
+}
+
+#app_food_largeFoodImage {
+	width: 350px; 
+	height: 350px;
+	margin: 10px; 
 }
 
 #app_foodlist_description {
@@ -70,14 +85,26 @@ div#app_food {
 	background: url(../assets/tablet.png) center center no-repeat;
 }
 
-#app_food_foodPicture {
+#app_food_foodPictureWrapper {
 	position: absolute;
    	left: 50%;
    	top: 50%;
-   	width: 190px; /* Breite des Elements */
+}
+
+#app_food_foodPicture {
+	width: 190px; /* Breite des Elements */
    	height: 190px; /* Höhe des Elements */
    	margin-left: -120px; /* Breite des Elements geteilt durch zwei! */
    	margin-top: -95px; /* Höhe des Elements geteilt durch zwei! */
+}
+
+#app_food_zoomFoodPicture {
+	width: 48px; /* Breite des Elements */
+   	height: 48px; /* Höhe des Elements */
+   	margin-left: -44px; /* Breite des Elements geteilt durch zwei! */
+   	margin-top: -44px; /* Höhe des Elements geteilt durch zwei! */
+   	background-repeat: no-repeat;
+   	background-position:center center;
 }
 
 div#app_food_foodname {
@@ -130,3 +157,27 @@ div#app_food_foodFee {
 div#app_food_foodFee div#app_food_feeTitle {
 	font: normal normal normal 24px/24px Purisa, Helvetica, Arial, sans-serif;
 }
+
+/* About dialog */
+div#app_modalPopupAbout p, div#app_modalPopupAbout h2 {
+	font-family: 'Helvetica Neue', 'Nimbus Sans L', Arial, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	text-align: left;
+	vertical-align: middle;
+}
+
+div#app_modalPopupAbout h2 {
+	font-weight: bolder;
+}
+
+div#app_modalPopupAbout img {
+	width: 30px;
+	height: 30px;
+	text-align: left;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
