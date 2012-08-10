@@ -185,3 +185,6 @@ div#app_modalPopupAbout img {
 	margin-right: 10px;
 }
 
+#app_foodlist_list_port {
+	background: url(../assets/bg.png);
+}
