@@ -4,6 +4,6 @@
 var StraNaCanteen = ({
 	initialize: function()  {
 		this.key = "strana";
-    	this.name = "Straße der Nationen";
+		this.name = "Straße der Nationen";
 	}
 });

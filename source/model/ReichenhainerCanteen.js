@@ -4,6 +4,6 @@
 var ReichenhainerCanteen = ({
 	initialize: function()  {
 		this.key = "rh";
-    	this.name = "Reichenhainer";
+		this.name = "Reichenhainer";
 	}
 });

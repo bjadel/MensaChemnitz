@@ -32,23 +32,27 @@ enyo.kind({
 			{kind: "FoodList", name: "foodlist", onSelect: "foodSelected", fit: true},
 			{name: "modalPopupAbout", classes: "onyx-sample-popup", kind: "onyx.Popup", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
 				{content: "About"},
-				{ tag: "h2", content: "Info" },
-				{ name: "authorContent", tag: "p", content: "Author: Björn Adelberg" },
-				{ name: "versionContent", tag: "p", content: "Version: 0.1.3-1" },
-				{ tag: "h2", content: "Support" },
-				{kind: "FittableColumns", components: [
-					{ name: "mailPicture", kind: "Image", src: "assets/mail.png"},									
-					{ name: "mailContent", tag: "p", content: "bjawebos@adelberg-online.de" }
+				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
+					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Info"},
+					{ name: "authorContent", tag: "p", content: "Author: Björn Adelberg" },
+					{ name: "versionContent", tag: "p", content: "Version: 0.1.3-1" }					
 				]},
-				{kind: "FittableColumns", components: [
-					{ name: "wwwPicture", kind: "Image", src: "assets/browser.png"},									
-					{ name: "homepageContent", tag: "p", content: "http://dev.adelberg-online.de" }
+				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
+					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Support"},
+					{ kind: "FittableColumns", components: [
+						{ name: "mailPicture", kind: "Image", src: "assets/mail.png"},									
+						{ name: "mailContent", tag: "p", content: "bjawebos@adelberg-online.de" }
+					]},
+					{ kind: "FittableColumns", components: [
+						{ name: "wwwPicture", kind: "Image", src: "assets/browser.png"},									
+						{ name: "homepageContent", tag: "p", content: "http://dev.adelberg-online.de" }
+					]},
+					{ kind: "FittableColumns", components: [
+						{ name: "twtPicture", kind: "Image", src: "assets/twitter.png"},									
+						{ name: "twitterContent", tag: "p", content: "https://twitter.com/bjawebos" }
+					]}										
 				]},
-				{kind: "FittableColumns", components: [
-					{ name: "twtPicture", kind: "Image", src: "assets/twitter.png"},									
-					{ name: "twitterContent", tag: "p", content: "https://twitter.com/bjawebos" }
-				]},
-				{kind: "onyx.Button", content: "Close", ontap: "closeModalPopup"} 
+				{ kind: "onyx.Button", classes: "onyx-affirmative", content: "Close", ontap: "closeModalPopup"} 
 			]}
 		]},
 		{kind: "FittableRows", components: [
