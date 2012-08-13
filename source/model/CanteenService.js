@@ -67,10 +67,10 @@ var CanteenService = ({
 				FoodModel.addFood(category, description, feeStudent, feeEmployee, feeGuest, isPictureAvailable, pictureKey);
 			}
 	  	} catch(err) {
-	  		FoodModel.addFood("Upps", "The server is not reachable.", "", "", "", "0", "");
+	  		FoodModel.addFood("Upps", "The server is not reachable.", "", "", "", "1", "0");
 	  	}
 		if (FoodModel.getSize() <= 0) {
-	    	FoodModel.addFood("Upps", "No canteen menu entry available for this day.", "", "", "", "0", "");
+	    	FoodModel.addFood("Upps", "No canteen menu entry available for this day.", "", "", "", "1", "0");
 	    }
 	}
 });

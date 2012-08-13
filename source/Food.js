@@ -13,7 +13,7 @@ enyo.kind({
 				{name: "description"}
 			]},
 			{name: "foodPictureWrapper", kind: "FittableRows", components: [
-				{name: "foodPicture", kind: "Image", src: "assets/0.png", style: "width: 190px;"},
+				{name: "foodPicture", kind: "Image", src: "assets/0.png", style: "width: 190px;", onerror: "imageError"},
 				{name: "zoomFoodPicture", kind: "onyx.IconButton", src: "assets/zoom.png", ontap: "showPopup", popup: "modalPopupViewLargerPicture"}
 			]},
 			{name: "foodFee", components: [
@@ -23,7 +23,7 @@ enyo.kind({
 				{name: "feeGuest"}
 			]},
 			{name: "modalPopupViewLargerPicture", classes: "onyx-sample-popup", kind: "onyx.Popup", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
-				{name: "largeFoodImage", kind: "Image", src: "assets/0.png", ontap: "closeModalPopup"}, 
+				{name: "largeFoodImage", kind: "Image", src: "assets/0.png", ontap: "closeModalPopup", onerror: "imageError"}, 
 				{tag: "br"}, 
 				{kind: "onyx.Button", classes: "onyx-affirmative", content: "Close", ontap: "closeModalPopup"} 
 			]}
@@ -65,5 +65,8 @@ enyo.kind({
 	},
 	closeModalPopup: function() { 
 		this.$.modalPopupViewLargerPicture.hide(); 
+	},
+	imageError: function(inSender, inEvent) {
+		inEvent.currentTarget.src = "assets/0.png";
 	}
 });

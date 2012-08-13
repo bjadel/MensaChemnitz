@@ -20,7 +20,7 @@ enyo.kind({
 				{name: "item", classes: "item", ontap: "itemTap", components: [
 					{name: "index", classes: "list-sample-index"},
 					{kind: "FittableColumns", components: [
-						{name:"image", components: [ {name: "foodImage", kind: "Image", style: "width: 70px; height: 70px;", src: "assets/0.png"} ]},
+						{name:"image", components: [ {name: "foodImage", kind: "Image", style: "width: 70px; height: 70px;", src: "assets/0.png", onerror: "imageError"} ]},
 						{name: "description", components: [ 
 							{kind: "FittableRows", components: [
 								{name: "name"},
@@ -88,5 +88,8 @@ enyo.kind({
 		var month = inDate.getMonth() + 1;
 		var day = inDate.getDate();
 		this.initialize(year, month, day);
+	},
+	imageError: function(inSender, inEvent) {
+		inEvent.currentTarget.src = "assets/0.png";
 	}
 });
