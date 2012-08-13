@@ -17,7 +17,7 @@ enyo.kind({
 			{kind: "FittableColumns", components: [
 				{kind: "onyx.MenuDecorator", fit: "true", onSelect: "settingsMenuItemSelected", components: [ 
 					{name: "menuCanteen", content: "", components: [{kind: "onyx.Icon", src: "assets/settings.png"}]},
-					{kind: "onyx.Tooltip", content: "Settings such as choosing your canteen"},
+					{kind: "onyx.Tooltip", content: "Settings such as canteen selection"},
 					{kind: "onyx.Menu", components: [ 
 						{name: "stranaCanteen", content: ""}, 
 						{name: "rhCanteen", content: ""},

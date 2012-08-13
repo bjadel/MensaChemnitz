@@ -55,6 +55,16 @@
 	background: rgba(0,0,0,0.6);
 }
 
+.onyx-menu, .onyx.onyx-menu {
+	position: absolute;
+	min-width: 160px;
+	top: 100%;
+	left: 0;
+	margin-top: 2px;
+	padding: 3px 0;
+	border-radius: 3px;
+}
+
 #app_foodlist_image {
 }
 
@@ -108,7 +118,7 @@ div#app_food {
 }
 
 div#app_food_foodname {
-	font: normal normal normal 16px/18px Purisa, Helvetica, Arial, sans-serif;
+	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	position: relative; 
 	top: 20px;
 	width: 80%; 
@@ -129,11 +139,11 @@ div#app_food_foodname {
     transform: rotate(-3deg);
 }
 div#app_food_foodname div#app_food_foodtitle {
-	font: normal normal normal 24px/24px Purisa, Helvetica, Arial, sans-serif;
+	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
 }
 
 div#app_food_foodFee {
-	font: normal normal normal 16px/18px Purisa, Helvetica, Arial, sans-serif;
+	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	position: absolute; 
 	top: 70%;
 	left: 35%;
@@ -155,7 +165,7 @@ div#app_food_foodFee {
     transform: rotate(7deg);
 }
 div#app_food_foodFee div#app_food_feeTitle {
-	font: normal normal normal 24px/24px Purisa, Helvetica, Arial, sans-serif;
+	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
 }
 
 /* About dialog */

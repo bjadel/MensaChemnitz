@@ -23,7 +23,7 @@ enyo.kind({
 				{name: "feeGuest"}
 			]},
 			{name: "modalPopupViewLargerPicture", classes: "onyx-sample-popup", kind: "onyx.Popup", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
-				{name: "largeFoodImage", kind: "Image", src: "assets/0.png"}, 
+				{name: "largeFoodImage", kind: "Image", src: "assets/0.png", ontap: "closeModalPopup"}, 
 				{tag: "br"}, 
 				{kind: "onyx.Button", classes: "onyx-affirmative", content: "Close", ontap: "closeModalPopup"} 
 			]}
