@@ -6,6 +6,11 @@ var CanteenModel = ({
 		ReichenhainerCanteen.initialize();
 		StraNaCanteen.initialize();
 		this.canteen = ReichenhainerCanteen;
+		this.storageKey = "canteen";
+		var storageCanteen = this.getStorageCanteen();
+		if ( storageCanteen != null ) {
+			this.canteen = storageCanteen;
+		}
 	},
 	getCanteen: function() {
 		return this.canteen;
@@ -16,8 +21,18 @@ var CanteenModel = ({
 		} else {
 			this.canteen = ReichenhainerCanteen;
 		}
+		this.setStorageCanteen(this.canteen);
 	},
 	getCanteenName: function() {
 		return this.canteen.name;
+	},
+	setStorageCanteen: function(obj){
+		localStorage.setItem(this.storageKey, JSON.stringify(obj));
+	},
+	getStorageCanteen: function(){
+		var result = localStorage.getItem(this.storageKey);
+		if(typeof result === "string"){
+			return JSON.parse(result);
+		}
 	}
 });
