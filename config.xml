@@ -3,7 +3,7 @@
 xmlns:gap = "http://phonegap.com/ns/1.0"
 id = "org.bja.mensa.chemnitz"
 versionCode="4" 
-version = "0.1.4-1">
+version = "0.1.4">
 	<name>Mensa Chemnitz</name>
 	
 	<description>
