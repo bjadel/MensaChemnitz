@@ -92,7 +92,13 @@
 }
 
 div#app_food {
+	background: url(../assets/bgwood.jpg);
+	z-index: 1;
+}
+
+div#app_food_fittableRows {
 	background: url(../assets/tablet.png) center center no-repeat;
+	z-index: 2;
 }
 
 #app_food_foodPictureWrapper {
