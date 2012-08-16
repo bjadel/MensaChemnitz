@@ -25,9 +25,18 @@ enyo.kind({
 						{content: "About"}
 					]}
 				]},
-				{kind: "onyx.Button", name:"buttonPreviousDate", ontap:"buttonPreviousDate", components: [ {kind: "onyx.Icon", src: "assets/go-previous.png"} ]},
-				{kind: "onyx.Button", name:"buttonHomeDate", ontap:"buttonHomeDate", components: [ {kind: "onyx.Icon", src: "assets/go-home.png"} ]},
-				{kind: "onyx.Button", name:"buttonNextDate", ontap:"buttonNextDate", components: [ {kind: "onyx.Icon", src: "assets/go-next.png"} ]}
+				{kind: "onyx.TooltipDecorator", components: [
+					{kind: "onyx.Button", name:"buttonPreviousDate", ontap:"buttonPreviousDate", components: [ {kind: "onyx.Icon", src: "assets/go-previous.png"} ]},
+					{kind: "onyx.Tooltip", content: "Previous"} 
+				]},
+				{kind: "onyx.TooltipDecorator", components: [
+					{kind: "onyx.Button", name:"buttonHomeDate", ontap:"buttonHomeDate", components: [ {kind: "onyx.Icon", src: "assets/go-home.png"} ]},
+					{kind: "onyx.Tooltip", content: "Today"}
+				]},
+				{kind: "onyx.TooltipDecorator", components: [
+					{kind: "onyx.Button", name:"buttonNextDate", ontap:"buttonNextDate", components: [ {kind: "onyx.Icon", src: "assets/go-next.png"} ]},
+					{kind: "onyx.Tooltip", content: "Next"}
+				]}
 			]},
 			{kind: "FoodList", name: "foodlist", onSelect: "foodSelected", fit: true},
 			{name: "modalPopupAbout", classes: "onyx-sample-popup", kind: "onyx.Popup", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
