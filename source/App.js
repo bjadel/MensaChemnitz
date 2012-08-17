@@ -81,6 +81,14 @@ enyo.kind({
 		DateModel.initialize();
 		CanteenModel.initialize();
 		AppModel.initialize();
+		// When ready...
+		window.addEventListener("load",function() {
+			// Set a timeout...
+			setTimeout(function(){
+				// Hide the address bar!
+				window.scrollTo(0, 1);
+			}, 0);
+		});
 		// set about content
 		this.$.mailContent.setContent(AppModel.supportMail);
 		this.$.homepageContent.setContent(AppModel.supportHomepage);
