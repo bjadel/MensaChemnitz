@@ -18,7 +18,7 @@ enyo.kind({
 				{kind: "onyx.MenuDecorator", fit: "true", onSelect: "settingsMenuItemSelected", components: [ 
 					{name: "menuCanteen", content: "", components: [{kind: "onyx.Icon", src: "assets/settings.png"}]},
 					{kind: "onyx.Tooltip", content: "Settings such as canteen selection"},
-					{kind: "onyx.Menu", components: [ 
+					{kind: "onyx.Menu", floating: true, components: [ 
 						{name: "stranaCanteen", content: ""}, 
 						{name: "rhCanteen", content: ""},
 						{classes: "onyx-menu-divider"},
