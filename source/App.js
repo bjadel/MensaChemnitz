@@ -82,6 +82,7 @@ enyo.kind({
 		DateModel.initialize();
 		CanteenModel.initialize();
 		AppModel.initialize();
+		AppModel.setExistsSmallScreen(enyo.Panels.isScreenNarrow());
 		// When ready...
 		window.addEventListener("load",function() {
 			// Set a timeout...
@@ -91,7 +92,7 @@ enyo.kind({
 			}, 0);
 		});
 		// set visibility of food rotation buttons
-		if (!enyo.Panels.isScreenNarrow()) {
+		if (!AppModel.getExistsSmallScreen()) {
 			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
 			this.$.buttonNextFood.setStyle("visibility:hidden;");
 		}

@@ -61,7 +61,7 @@ enyo.kind({
 		if (i < FoodModel.getSize()) {
 			var foodEntry = FoodModel.getFoodByIndex(i, false);
 			// apply selection style if inSender (the list) indicates that this row is selected.
-			if (!enyo.Panels.isScreenNarrow()) {
+			if (!AppModel.getExistsSmallScreen()) {
 				this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(i)); 
 			} 
 			if (foodEntry) {
