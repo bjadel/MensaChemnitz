@@ -119,6 +119,11 @@ enyo.kind({
     foodSelected: function(inSender, inFood) {
     	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
     	this.$.food.setFood(foodEntry);
+    	if (AppModel.getExistsSmallScreen()) {
+    		if (!inFood.first == 1) {
+	    		this.setIndex(1);
+    		}
+    	}
     },
     settingsMenuItemSelected: function(inSender, inSettings) {
     	if ("About" == inSettings.content) {

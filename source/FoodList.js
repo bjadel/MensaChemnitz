@@ -47,23 +47,21 @@ enyo.kind({
 	},
 	gotMenu: function(inSender, inResponse) {
 	  	CanteenService.getCanteenMenu(inSender, inResponse);
-	    this.doSelect({index: 0});
+	    this.doSelect({index: 0, first: 1});
 	    this.$.list.setCount(FoodModel.getSize());
 	    this.render();
 	},
 	gotMenuFailure: function(inSender, inResponse) {
 		console.log("got failure from getMenu");
 		CanteenService.getError();
-		this.doSelect({index: 0});
+		this.doSelect({index: 0, first: 1});
 	},
 	setupItem: function(inSender, inIndex) {
 		var i = inIndex.index;
 		if (i < FoodModel.getSize()) {
 			var foodEntry = FoodModel.getFoodByIndex(i, false);
 			// apply selection style if inSender (the list) indicates that this row is selected.
-			if (!AppModel.getExistsSmallScreen()) {
-				this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(i)); 
-			} 
+			this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(i)); 
 			if (foodEntry) {
 				if (foodEntry.isPictureAvailable) {
 					if (foodEntry.pictureKey != "") {
