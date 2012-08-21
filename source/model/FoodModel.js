@@ -5,6 +5,7 @@ var FoodModel = ({
 	initialize: function()  {
 		this.lastClicked = 0;
     	this.foodList = [];
+    	this.rotateCounter = 0;
 	},
 	addFood: function(category, description, feeStudent, feeEmployee, feeGuest, isPictureAvailable, pictureKey) {
 		this.foodList.push({
@@ -20,10 +21,27 @@ var FoodModel = ({
 	getLastClickedFood: function() {
 		return this.foodList[this.lastClicked];
 	},
-	getFoodByIndex: function(index) {
+	getFoodByIndex: function(index, isRotate) {
+		if (isRotate) {
+			this.rotateCounter = index;
+		}
 		return this.foodList[index];
 	},
 	getSize: function() {
 		return this.foodList.length;
+	},
+	getNextFood: function() {
+		this.rotateCounter++;
+		if (this.rotateCounter >= this.getSize()) {
+			this.rotateCounter = 0;
+		}
+		return this.getFoodByIndex(this.rotateCounter, false);
+	},
+	getPreviousFood: function() {
+		this.rotateCounter--;
+		if (this.rotateCounter < 0) {
+			this.rotateCounter = this.getSize() - 1;
+		}
+		return this.getFoodByIndex(this.rotateCounter, false);
 	}
 });

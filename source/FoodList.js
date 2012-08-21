@@ -6,9 +6,9 @@ enyo.kind({
 	kind: "Panels",
 	realtimeFit: true,
 	classes: "enyo-border-box",
-	events: { 
-      onSelect: ""
-  	},
+	events: {
+		onSelect: ""
+	},
 	components: [
 		{name: "getMenu", kind: "enyo.WebService", 
 			handleAs: "text",
@@ -58,26 +58,30 @@ enyo.kind({
 	},
 	setupItem: function(inSender, inIndex) {
 		var i = inIndex.index;
-		var foodEntry = FoodModel.getFoodByIndex(i);
-		// apply selection style if inSender (the list) indicates that this row is selected. 
-		this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(i)); 
-		if (foodEntry) {
-			if (foodEntry.isPictureAvailable) {
-				if (foodEntry.pictureKey != "") {
-					this.$.foodImage.setSrc("http://www-user.tu-chemnitz.de/~fnor/speiseplan/bilder_190/"+foodEntry.pictureKey+".png");
+		if (i < FoodModel.getSize()) {
+			var foodEntry = FoodModel.getFoodByIndex(i, false);
+			// apply selection style if inSender (the list) indicates that this row is selected.
+			if (!enyo.Panels.isScreenNarrow()) {
+				this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(i)); 
+			} 
+			if (foodEntry) {
+				if (foodEntry.isPictureAvailable) {
+					if (foodEntry.pictureKey != "") {
+						this.$.foodImage.setSrc("http://www-user.tu-chemnitz.de/~fnor/speiseplan/bilder_190/"+foodEntry.pictureKey+".png");
+					}
 				}
+				// category
+				this.$.name.setContent(foodEntry.category);
+				// description
+				this.$.foodItemDescription.setContent(foodEntry.description);
+				// fee
+				var feeList = "S: "+foodEntry.feeStudent.replace("?", "€")+" M: "+foodEntry.feeEmployee.replace("?", "€")+" G: "+foodEntry.feeGuest.replace("?", "€");
+				this.$.foodItemFeeList.setContent(feeList);
+				return true;
+			} else {
+				this.$.name.setContent("");
+				return true;
 			}
-			// category
-			this.$.name.setContent(foodEntry.category);
-			// description
-			this.$.foodItemDescription.setContent(foodEntry.description);
-			// fee
-			var feeList = "S: "+foodEntry.feeStudent.replace("?", "€")+" M: "+foodEntry.feeEmployee.replace("?", "€")+" G: "+foodEntry.feeGuest.replace("?", "€");
-			this.$.foodItemFeeList.setContent(feeList);
-			return true;
-		} else {
-			this.$.name.setContent("");
-			return true;
 		}
 	},
 	itemTap: function(inSender, inEvent) {

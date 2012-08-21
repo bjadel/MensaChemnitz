@@ -3,7 +3,7 @@
  */
 var AppModel = ({
 	initialize: function()  {
-		this.version = "0.1.4-1";
+		this.version = "0.1.5";
     	this.author = "Björn Adelberg";
     	this.supportMail = "bjawebos@adelberg-online.de";
     	this.supportHomepage = "http://dev.adelberg-online.de";

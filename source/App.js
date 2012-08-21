@@ -44,7 +44,7 @@ enyo.kind({
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Info"},
 					{ name: "authorContent", tag: "p", content: "Author: Björn Adelberg" },
-					{ name: "versionContent", tag: "p", content: "Version: 0.1.3-1" }					
+					{ name: "versionContent", tag: "p", content: "Version: 0.1.5" }					
 				]},
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Support"},
@@ -69,7 +69,8 @@ enyo.kind({
 				{kind: "onyx.Grabber"},
 				{kind: "Scroller", thumb: false, fit: true, touch: true, vertical: "hidden", style: "margin: 0;", components: [
 					{classes: "onyx-toolbar-inline", style: "white-space: nowrap;", components: [
-						
+						{kind: "onyx.Button", name:"buttonPreviousFood", ontap:"buttonPreviousFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-previous-gray.png"} ]},
+						{kind: "onyx.Button", name:"buttonNextFood", ontap:"buttonNextFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-next-gray.png"} ]}
 					]}
 				]}
 			]},
@@ -89,6 +90,11 @@ enyo.kind({
 				window.scrollTo(0, 1);
 			}, 0);
 		});
+		// set visibility of food rotation buttons
+		if (!enyo.Panels.isScreenNarrow()) {
+			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
+			this.$.buttonNextFood.setStyle("visibility:hidden;");
+		}
 		// set about content
 		this.$.mailContent.setContent(AppModel.supportMail);
 		this.$.homepageContent.setContent(AppModel.supportHomepage);
@@ -110,7 +116,7 @@ enyo.kind({
         this.$.foodlist.setDate(DateModel.getCurrentDate());
     },
     foodSelected: function(inSender, inFood) {
-    	var foodEntry =  FoodModel.getFoodByIndex(inFood.index);
+    	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
     	this.$.food.setFood(foodEntry);
     },
     settingsMenuItemSelected: function(inSender, inSettings) {
@@ -152,5 +158,13 @@ enyo.kind({
     buttonNextDate: function() {
         this.$.foodlist.setDate(DateModel.getNextDate());
         this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
+    },
+    buttonPreviousFood: function() {
+        var foodEntry =  FoodModel.getPreviousFood();
+    	this.$.food.setFood(foodEntry);
+    },
+    buttonNextFood: function() {
+    	var foodEntry =  FoodModel.getNextFood();
+    	this.$.food.setFood(foodEntry);
     }
 });
