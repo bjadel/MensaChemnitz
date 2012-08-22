@@ -96,32 +96,31 @@ div#app_food {
 	z-index: 1;
 }
 
-div#app_food_fittableRows {
-	background: url(../assets/tablet.png) center center no-repeat;
-	z-index: 2;
-}
-
 #app_food_foodPictureWrapper {
-	position: absolute;
-   	left: 50%;
-   	top: 50%;
+	z-index: 2;
+	padding-top: 45px;
+	padding-bottom: 45px;
+	margin-top: 45px;
+	margin-bottom: 45px;
+	height: 285px;
+	background: url(../assets/tablet.png) center center no-repeat;
+	text-align: center;
 }
 
-#app_food_foodPicture {
+#app_food_foodPictureWrapper #app_food_foodPicture {
+	z-index: 4;
 	width: 190px; /* Breite des Elements */
    	height: 190px; /* Höhe des Elements */
-   	margin-left: -120px; /* Breite des Elements geteilt durch zwei! */
-   	margin-top: -95px; /* Höhe des Elements geteilt durch zwei! */
 }
 
-#app_food_zoomFoodPicture {
+#app_food_foodPictureWrapper #app_food_zoomFoodPicture {
+	z-index: 5;
 	width: 48px; /* Breite des Elements */
    	height: 48px; /* Höhe des Elements */
-   	margin-left: -44px; /* Breite des Elements geteilt durch zwei! */
-   	margin-top: -44px; /* Höhe des Elements geteilt durch zwei! */
-   	background-repeat: no-repeat;
-   	background-position:center center;
+   	position: relative;
+   	left: -44px;
 }
+
 
 div#app_food_foodname {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
@@ -143,6 +142,7 @@ div#app_food_foodname {
     -moz-transform: rotate(-3deg);
     -ms-transform: rotate(-3deg);
     transform: rotate(-3deg);
+    z-index: 7;
 }
 div#app_food_foodname div#app_food_foodtitle {
 	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
@@ -151,7 +151,6 @@ div#app_food_foodname div#app_food_foodtitle {
 div#app_food_foodFee {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	position: absolute; 
-	top: 70%;
 	left: 35%;
 	width: 210px; 
 	min-height: 30px; 
@@ -169,6 +168,7 @@ div#app_food_foodFee {
     -moz-transform: rotate(7deg);
     -ms-transform: rotate(7deg);
     transform: rotate(7deg);
+    z-index: 6;
 }
 div#app_food_foodFee div#app_food_feeTitle {
 	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
