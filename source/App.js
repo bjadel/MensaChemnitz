@@ -69,8 +69,9 @@ enyo.kind({
 				{kind: "onyx.Grabber"},
 				{kind: "Scroller", thumb: false, fit: true, touch: true, vertical: "hidden", style: "margin: 0;", components: [
 					{classes: "onyx-toolbar-inline", style: "white-space: nowrap;", components: [
-						{kind: "onyx.Button", name:"buttonPreviousFood", ontap:"buttonPreviousFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-previous-gray.png"} ]},
-						{kind: "onyx.Button", name:"buttonNextFood", ontap:"buttonNextFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-next-gray.png"} ]}
+						{kind: "onyx.Button", name:"buttonBack", ontap:"buttonBack", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-back-gray.png"} ]},
+						{kind: "onyx.Button", name:"buttonNextFood", ontap:"buttonNextFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-next-gray.png"} ]},
+						{kind: "onyx.Button", name:"buttonPreviousFood", ontap:"buttonPreviousFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-previous-gray.png"} ]}
 					]}
 				]}
 			]},
@@ -93,6 +94,7 @@ enyo.kind({
 		});
 		// set visibility of food rotation buttons
 		if (!AppModel.getExistsSmallScreen()) {
+			this.$.buttonBack.setStyle("visibility:hidden;");
 			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
 			this.$.buttonNextFood.setStyle("visibility:hidden;");
 		}
@@ -172,5 +174,8 @@ enyo.kind({
     buttonNextFood: function() {
     	var foodEntry =  FoodModel.getNextFood();
     	this.$.food.setFood(foodEntry);
-    }
+    },
+    buttonBack: function() {
+    	this.setIndex(0);
+	}
 });

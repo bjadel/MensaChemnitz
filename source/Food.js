@@ -14,7 +14,7 @@ enyo.kind({
 					{name: "description"}
 				]},
 				{name: "foodPictureWrapper", kind: "FittableRows", components: [
-					{name: "foodPicture", kind: "Image", src: "assets/0.png", style: "width: 190px;", onerror: "imageError"},
+					{name: "foodPicture", kind: "Image", src: "assets/0.png", onerror: "imageError"},
 					{name: "zoomFoodPicture", kind: "Image", src: "assets/zoom.png", ontap: "showPopup", popup: "modalPopupViewLargerPicture"}
 				]},
 				{name: "foodFee", components: [
@@ -35,6 +35,9 @@ enyo.kind({
 		this.inherited(arguments);
 	},
 	setFood: function(inFood) {
+		if (AppModel.getExistsSmallScreen()) {
+			this.$.foodPictureWrapper.setClasses("small_screen");
+		}
 		this.selectedFood = inFood;
 		this.$.foodtitle.setContent(inFood.category);
 		this.$.description.setContent(inFood.description);

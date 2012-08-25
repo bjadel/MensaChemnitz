@@ -96,6 +96,7 @@ div#app_food {
 	z-index: 1;
 }
 
+/* normal size*/
 #app_food_foodPictureWrapper {
 	z-index: 2;
 	padding-top: 45px;
@@ -121,6 +122,31 @@ div#app_food {
    	left: -44px;
 }
 
+/* small size */
+.small_screen#app_food_foodPictureWrapper {
+	z-index: 2;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 170px;
+	background: url(../assets/tablet_small.png) center center no-repeat;
+	text-align: center;
+}
+
+.small_screen#app_food_foodPictureWrapper #app_food_foodPicture {
+	z-index: 4;
+	width: 130px; /* Breite des Elements */
+   	height: 130px; /* Höhe des Elements */
+}
+
+.small_screen#app_food_foodPictureWrapper #app_food_zoomFoodPicture {
+	z-index: 5;
+	width: 48px; /* Breite des Elements */
+   	height: 48px; /* Höhe des Elements */
+   	position: relative;
+   	left: -20px;
+}
 
 div#app_food_foodname {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
@@ -133,15 +159,13 @@ div#app_food_foodname {
 	background: #f1f3a2; 
 	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(247,247,210,1)), to(rgba(240,242,155,1)));
 	background: -moz-linear-gradient(top,  rgba(247,247,210,1), rgba(240,242,155,1)); /* for firefox 3.6+ */ 
-	box-shadow: 0 2px 12px rgb(0,0,0);
-	box-shadow: 0 2px 12px rgba(0,0,0,0.5);
-	-moz-box-shadow: 0 2px 12px rgba(0,0,0,0.5); /* Mozilla Firefox */
-	-webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.5); /* Chrome */
-	box-shadow: 0 1px 2px #000; 
 	-webkit-transform: rotate(-3deg);
     -moz-transform: rotate(-3deg);
     -ms-transform: rotate(-3deg);
     transform: rotate(-3deg);
+    border-width:0px 1px 1px 0px;
+    border-color: #000;
+    border-style:solid;
     z-index: 7;
 }
 div#app_food_foodname div#app_food_foodtitle {
@@ -159,15 +183,13 @@ div#app_food_foodFee {
 	background: #f1f3a2; 
 	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(247,247,210,1)), to(rgba(240,242,155,1)));
 	background: -moz-linear-gradient(top,  rgba(247,247,210,1), rgba(240,242,155,1)); /* for firefox 3.6+ */ 
-	box-shadow: 0 2px 12px rgb(0,0,0);
-	box-shadow: 0 2px 12px rgba(0,0,0,0.5);
-	-moz-box-shadow: 0 2px 12px rgba(0,0,0,0.5); /* Mozilla Firefox */
-	-webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.5); /* Chrome */
-	box-shadow: 0 1px 2px #000; 
 	-webkit-transform: rotate(7deg);
     -moz-transform: rotate(7deg);
     -ms-transform: rotate(7deg);
     transform: rotate(7deg);
+    border-width:0px 1px 1px 0px;
+    border-color: #000;
+    border-style:solid;
     z-index: 6;
 }
 div#app_food_foodFee div#app_food_feeTitle {
@@ -204,3 +226,14 @@ div#app_modalPopupAbout img {
 #app_foodlist_list_port {
 	background: url(../assets/bg.png);
 }
+
+#app_buttonPreviousFood {
+	padding: 5px;
+	float:right; 
+}
+
+#app_buttonNextFood {
+	padding: 5px;
+	float:right;
+}
+

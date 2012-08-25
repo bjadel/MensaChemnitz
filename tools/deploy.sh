@@ -58,3 +58,6 @@ for i in $SOURCE/lib/*; do
 		cp -r $i "$TARGET/lib"
 	fi
 done
+
+# copy config.xml
+cp "$SOURCE/config.xml" "$TARGET"
