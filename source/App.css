@@ -241,6 +241,10 @@ div#app_modalPopupAbout img {
 	background: url(../assets/bg.png);
 }
 
+#app_buttonBack {
+	float:left; 
+}
+
 #app_buttonPreviousFood {
 	padding: 5px;
 	float:right; 
