@@ -83,7 +83,7 @@ enyo.kind({
 		DateModel.initialize();
 		CanteenModel.initialize();
 		AppModel.initialize();
-		AppModel.setExistsSmallScreen(enyo.Panels.isScreenNarrow());
+		AppModel.setExistsSmallScreen(enyo.dom.getWindowWidth() <= 760);
 		// When ready...
 		window.addEventListener("load",function() {
 			// Set a timeout...
