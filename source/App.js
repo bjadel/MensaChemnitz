@@ -8,7 +8,11 @@ enyo.kind({
 	fit: true,
 	realtimeFit: true,
 	arrangerKind: "CollapsingArranger",
+	handlers: {
+		resize: "resizeHandler"
+	},
 	components: [
+		{kind: "enyo.Signals", onbackbutton: "backButtonHandler" },
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
 				{name: "title", content: "Chemnitz", style: "width: 90%;"},
@@ -83,7 +87,7 @@ enyo.kind({
 		DateModel.initialize();
 		CanteenModel.initialize();
 		AppModel.initialize();
-		AppModel.setExistsSmallScreen(enyo.dom.getWindowWidth() <= 760);
+		AppModel.setExistsSmallScreen();
 		// When ready...
 		window.addEventListener("load",function() {
 			// Set a timeout...
@@ -177,5 +181,23 @@ enyo.kind({
     },
     buttonBack: function() {
     	this.setIndex(0);
+	},
+	backButtonHandler: function(inSender, inEvent) {
+		if (AppModel.getExistsSmallScreen()) {
+			this.setIndex(0);
+		}
+	},
+	resizeHandler: function(inSender, inEvent) {
+		AppModel.setExistsSmallScreen();
+		if (!AppModel.getExistsSmallScreen()) {
+			this.$.buttonBack.setStyle("visibility:hidden;");
+			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
+			this.$.buttonNextFood.setStyle("visibility:hidden;");
+		} else {
+			this.$.buttonBack.setStyle("visibility:visible;");
+			this.$.buttonPreviousFood.setStyle("visibility:visible;");
+			this.$.buttonNextFood.setStyle("visibility:visible;");
+		}
+		this.render();
 	}
 });

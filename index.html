@@ -20,6 +20,8 @@
 	</head>
 	<body class="enyo-unselectable">
 		<script>
+			// tell enyo to listen for backbutton event
+			enyo.dispatcher.listen(document, "backbutton");
 			new App().write();
 		</script>
 	</body>

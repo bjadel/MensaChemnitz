@@ -10,8 +10,8 @@ var AppModel = ({
     	this.supportTwitter = "https://twitter.com/bjawebos";
     	this.existsSmallScreen = false;
 	},
-	setExistsSmallScreen: function(smallScreen) {
-		this.existsSmallScreen = smallScreen;
+	setExistsSmallScreen: function() {
+		this.existsSmallScreen = enyo.dom.getWindowWidth() <= 760;
 	},
 	getExistsSmallScreen: function() {
 		return this.existsSmallScreen;
