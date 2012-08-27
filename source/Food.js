@@ -37,6 +37,7 @@ enyo.kind({
 	setFood: function(inFood) {
 		if (AppModel.getExistsSmallScreen()) {
 			this.$.foodPictureWrapper.setClasses("small_screen");
+			this.$.largeFoodImage.setClasses("small_screen");
 		}
 		this.selectedFood = inFood;
 		this.$.foodtitle.setContent(inFood.category);
@@ -52,7 +53,7 @@ enyo.kind({
 	},
 	showPopup: function(inSender) { 
 		var p = this.$[inSender.popup]; 
-		if (p) { 
+		if (p) {
 			p.show(); 
 		} 
 	},
