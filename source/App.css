@@ -232,9 +232,8 @@ div#app_modalPopupAbout p {
 #app_modalPopupAbout .popup_app_groupboxHeader {
 	text-align: left;
 	color: #4C4C4C;
-	background: #AAA url(../../images/gradient.png) repeat-x 0 10px;
+	background: #AAA url(../lib/onyx/images/gradient.png) repeat-x 0 10px;
 	border: none;
-	background: #AAA url(../../images/gradient.png) repeat-x 0 10px;
 }
 
 div#app_modalPopupAbout img {
