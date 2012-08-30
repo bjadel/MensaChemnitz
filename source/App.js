@@ -205,20 +205,20 @@ enyo.kind({
 		if (inEvent.keyCode === 27 || inEvent.keyCode === 32 || inEvent.keyCode === 13) {
 			// esc, space, enter
 			if (AppModel.getExistsSmallScreen()) {
-				this.setIndex(0);
+				this.buttonNextDate();
 			}
 		} else if (inEvent.keyCode === 40 || inEvent.keyCode === 34) {
 			// arrow/page down
-			this.$.buttonNextFood();
+			this.buttonNextFood();
 		} else if (inEvent.keyCode === 38 || inEvent.keyCode === 33) {
 			// arrow/page up
-			this.$.buttonPreviousFood();
+			this.buttonPreviousFood();
 		} else if (inEvent.keyCode === 38) {
 			// arrow right
-			this.$.buttonNextDate();
+			this.buttonNextDate();
 		} else if (inEvent.keyCode === 37) {
 			// arrow left
-			this.$.buttonPreviousDate();
+			this.buttonPreviousDate();
 		}
 	}
 });
