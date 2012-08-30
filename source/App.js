@@ -213,7 +213,7 @@ enyo.kind({
 		} else if (inEvent.keyCode === 38 || inEvent.keyCode === 33) {
 			// arrow/page up
 			this.buttonPreviousFood();
-		} else if (inEvent.keyCode === 38) {
+		} else if (inEvent.keyCode === 39) {
 			// arrow right
 			this.buttonNextDate();
 		} else if (inEvent.keyCode === 37) {
