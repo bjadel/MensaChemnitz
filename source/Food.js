@@ -23,7 +23,7 @@ enyo.kind({
 					{name: "feeEmployee"},
 					{name: "feeGuest"}
 				]},
-				{name: "modalPopupViewLargerPicture", classes: "onyx-sample-popup", kind: "onyx.Popup", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
+				{name: "modalPopupViewLargerPicture", classes: "onyx-sample-popup", kind: "onyx.Popup", style: "z-index: 100;", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
 					{name: "largeFoodImage", kind: "Image", src: "assets/0.png", ontap: "closeModalPopup", onerror: "imageError"}, 
 					{tag: "br"}, 
 					{kind: "onyx.Button", classes: "onyx-affirmative", content: "Close", ontap: "closeModalPopup"} 

@@ -9,10 +9,10 @@ enyo.kind({
 	realtimeFit: true,
 	arrangerKind: "CollapsingArranger",
 	handlers: {
-		resize: "resizeHandler"
+		resize: "resizeHandler",
 	},
 	components: [
-		{kind: "enyo.Signals", onbackbutton: "backButtonHandler" },
+		{kind: "enyo.Signals", onbackbutton: "backButtonHandler", onkeypress: "docKeypress" },
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
 				{name: "title", content: "Chemnitz", style: "width: 90%;"},
@@ -43,7 +43,7 @@ enyo.kind({
 				]}
 			]},
 			{kind: "FoodList", name: "foodlist", onSelect: "foodSelected", fit: true},
-			{name: "modalPopupAbout", classes: "onyx-sample-popup", kind: "onyx.Popup", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
+			{name: "modalPopupAbout", classes: "onyx-sample-popup", kind: "onyx.Popup", style: "z-index: 100;", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
 				{content: "About"},
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Info"},
@@ -176,7 +176,7 @@ enyo.kind({
     	this.$.food.setFood(foodEntry);
     },
     buttonNextFood: function() {
-    	var foodEntry =  FoodModel.getNextFood();
+    	var foodEntry = FoodModel.getNextFood();
     	this.$.food.setFood(foodEntry);
     },
     buttonBack: function() {
@@ -199,5 +199,26 @@ enyo.kind({
 			this.$.buttonNextFood.setStyle("visibility:visible;");
 		}
 		this.render();
+	},
+	docKeypress: function(inSender, inEvent) {
+		//console.log("Key pressed (keyCode:"+inEvent.keyCode+")");
+		if (inEvent.keyCode === 27 || inEvent.keyCode === 32 || inEvent.keyCode === 13) {
+			// esc, space, enter
+			if (AppModel.getExistsSmallScreen()) {
+				this.setIndex(0);
+			}
+		} else if (inEvent.keyCode === 40 || inEvent.keyCode === 34) {
+			// arrow/page down
+			this.$.buttonNextFood();
+		} else if (inEvent.keyCode === 38 || inEvent.keyCode === 33) {
+			// arrow/page up
+			this.$.buttonPreviousFood();
+		} else if (inEvent.keyCode === 38) {
+			// arrow right
+			this.$.buttonNextDate();
+		} else if (inEvent.keyCode === 37) {
+			// arrow left
+			this.$.buttonPreviousDate();
+		}
 	}
 });
