@@ -205,7 +205,7 @@ enyo.kind({
 		if (inEvent.keyCode === 27 || inEvent.keyCode === 32 || inEvent.keyCode === 13) {
 			// esc, space, enter
 			if (AppModel.getExistsSmallScreen()) {
-				this.buttonNextDate();
+				this.setIndex(0);
 			}
 		} else if (inEvent.keyCode === 40 || inEvent.keyCode === 34) {
 			// arrow/page down
