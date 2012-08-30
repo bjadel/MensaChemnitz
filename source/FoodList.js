@@ -20,7 +20,12 @@ enyo.kind({
 				{name: "item", classes: "item", ontap: "itemTap", components: [
 					{name: "index", classes: "list-sample-index"},
 					{kind: "FittableColumns", components: [
-						{name:"image", components: [ {name: "foodImage", kind: "Image", style: "width: 70px; height: 70px;", src: "assets/0.png", onerror: "imageError"} ]},
+						{kind: "FittableRows", centered: true, style: "text-align: center;", components: [
+							{name:"image", components: [
+								{name: "foodImage", kind: "Image", style: "width: 70px; height: 70px;", src: "assets/0.png", onerror: "imageError"}
+							]}, 
+							{name: "ratingImage", kind: "Image", style: "visibility: hidden;", src: "", onerror: "imageError"}
+						]},
 						{name: "description", components: [ 
 							{kind: "FittableRows", components: [
 								{name: "name"},
@@ -67,6 +72,24 @@ enyo.kind({
 					if (foodEntry.pictureKey != "") {
 						this.$.foodImage.setSrc("http://www-user.tu-chemnitz.de/~fnor/speiseplan/bilder_190/"+foodEntry.pictureKey+".png");
 					}
+				}
+				// rating
+				if (foodEntry.rating != "" && foodEntry.rating > 0) {
+					this.$.ratingImage.setStyle("visibility:visible;");
+					if (foodEntry.rating == 1) {
+						this.$.ratingImage.setSrc("assets/rating-1.png");
+					} else if (foodEntry.rating == 2) {
+						this.$.ratingImage.setSrc("assets/rating-2.png");
+					} else if (foodEntry.rating == 3) {
+						this.$.ratingImage.setSrc("assets/rating-3.png");
+					} else if (foodEntry.rating == 4) {
+						this.$.ratingImage.setSrc("assets/rating-4.png");
+					} else if (foodEntry.rating == 5) {
+						this.$.ratingImage.setSrc("assets/rating-5.png");
+					}
+				} else {
+					this.$.ratingImage.setStyle("visibility:hidden;");
+					this.$.ratingImage.setSrc("");
 				}
 				// category
 				this.$.name.setContent(foodEntry.category);

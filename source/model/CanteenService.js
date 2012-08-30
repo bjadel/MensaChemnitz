@@ -12,7 +12,7 @@ var CanteenService = ({
 	},
 	getError: function() {
 		FoodModel.initialize();
-		FoodModel.addFood("Upps", "The server is not reachable.", "", "", "", "0", "");
+		FoodModel.addFood("Upps", "The server is not reachable.", "0", "", "", "", "0", "");
 	},
 	getCanteenMenu: function(inSender, inResponse) {
 		var xmlObject = new DOMParser().parseFromString(inResponse.data, 'text/xml');
@@ -23,6 +23,8 @@ var CanteenService = ({
 				var category = xmlObject.getElementsByTagName('essen')[i].getAttribute('kategorie');
 				// description
 				var description = xmlObject.getElementsByTagName('essen')[i].getElementsByTagName('deutsch')[0].childNodes[0].nodeValue;
+				// rating
+				var rating = xmlObject.getElementsByTagName('essen')[i].getAttribute('bewertung');
 				// fee model like {S: 1,40 €, M: 3,20 €, G: 5€}
 				/** element one */
 				var key0 = xmlObject.getElementsByTagName('essen')[i].getElementsByTagName('pr')[0].getAttribute('gruppe');
@@ -64,13 +66,13 @@ var CanteenService = ({
 				// picture
 				var isPictureAvailable = xmlObject.getElementsByTagName('essen')[i].getAttribute("img");
 				var pictureKey = xmlObject.getElementsByTagName('essen')[i].getAttribute("id");
-				FoodModel.addFood(category, description, feeStudent, feeEmployee, feeGuest, isPictureAvailable, pictureKey);
+				FoodModel.addFood(category, description, rating, feeStudent, feeEmployee, feeGuest, isPictureAvailable, pictureKey);
 			}
 	  	} catch(err) {
-	  		FoodModel.addFood("Upps", "The server is not reachable.", "", "", "", "1", "0");
+	  		FoodModel.addFood("Upps", "The server is not reachable.", "0", "", "", "", "1", "0");
 	  	}
 		if (FoodModel.getSize() <= 0) {
-	    	FoodModel.addFood("Upps", "No canteen menu entry available for this day.", "", "", "", "1", "0");
+	    	FoodModel.addFood("Upps", "No canteen menu entry available for this day.", "0", "", "", "", "1", "0");
 	    }
 	}
 });

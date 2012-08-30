@@ -10,6 +10,7 @@ enyo.kind({
 		{kind: "Scroller", horizontal:"hidden", fit: true, touch: true, classes: "scroller-sample-scroller enyo-fit", components: [
 			{kind: "FittableRows", centered: true, components: [
 				{name: "foodname", components: [
+					{name: "fooddate"},
 					{name: "foodtitle"},
 					{name: "description"}
 				]},
@@ -40,6 +41,7 @@ enyo.kind({
 			this.$.largeFoodImage.setClasses("small_screen");
 		}
 		this.selectedFood = inFood;
+		this.$.fooddate.setContent(DateModel.formatDate(DateModel.getCurrentDate()));
 		this.$.foodtitle.setContent(inFood.category);
 		this.$.description.setContent(inFood.description);
 		if (inFood.isPictureAvailable) {

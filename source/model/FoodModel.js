@@ -7,10 +7,11 @@ var FoodModel = ({
     	this.foodList = [];
     	this.rotateCounter = 0;
 	},
-	addFood: function(category, description, feeStudent, feeEmployee, feeGuest, isPictureAvailable, pictureKey) {
+	addFood: function(category, description, rating, feeStudent, feeEmployee, feeGuest, isPictureAvailable, pictureKey) {
 		this.foodList.push({
 			category:category, 
-			description:description, 
+			description:description,
+			rating:rating,
 			feeStudent:feeStudent, 
 			feeEmployee:feeEmployee, 
 			feeGuest:feeGuest,
