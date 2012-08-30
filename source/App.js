@@ -12,7 +12,7 @@ enyo.kind({
 		resize: "resizeHandler",
 	},
 	components: [
-		{kind: "enyo.Signals", onbackbutton: "backButtonHandler", onkeypress: "docKeypress" },
+		{kind: "enyo.Signals", onbackbutton: "backButtonHandler", onkeydown: "docKeypress" },
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
 				{name: "title", content: "Chemnitz", style: "width: 90%;"},
@@ -199,8 +199,8 @@ enyo.kind({
 	},
 	docKeypress: function(inSender, inEvent) {
 		//console.log("Key pressed (keyCode:"+inEvent.keyCode+")");
-		if (inEvent.keyCode === 27 || inEvent.keyCode === 32 || inEvent.keyCode === 13) {
-			// esc, space, enter
+		if (inEvent.keyCode === 27) {
+			// esc
 			if (AppModel.getExistsSmallScreen()) {
 				this.setIndex(0);
 			}
