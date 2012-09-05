@@ -193,8 +193,8 @@ enyo.kind({
 	},
 	docKeypress: function(inSender, inEvent) {
 		//console.log("Key pressed (keyCode:"+inEvent.keyCode+")");
-		if (inEvent.keyCode === 27) {
-			// esc
+		if (inEvent.keyCode === 27 || inEvent.keyCode === 8) {
+			// esc or backspace
 			if (AppModel.getExistsSmallScreen()) {
 				this.setIndex(0);
 			}
