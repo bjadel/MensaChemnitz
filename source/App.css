@@ -79,6 +79,12 @@
 	border-radius: 3px;
 }
 
+/* food list */
+
+#app_foodlist_list_port {
+	background: url(../assets/bg.png);
+}
+
 #app_foodlist_image {
 }
 
@@ -113,6 +119,7 @@
 	font-size: smaller;
 }
 
+/* food panel */
 div#app_food {
 	background: url(../assets/bgwood.jpg);
 	z-index: 1;
@@ -223,25 +230,36 @@ div#app_food_foodFee div#app_food_feeTitle {
 	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
 }
 
+.zoom {
+	zoom: 150%;
+}
+
 /* About dialog */
-div#app_modalPopupAbout p {
-	font-family: 'Helvetica Neue', 'Nimbus Sans L', Arial, sans-serif;
-	font-size: 16px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
+div#app_aboutPanel {
+	background: url(../assets/bgwood.jpg);
+	z-index: 1;
+}
+div#app_aboutPanel p {
+	font-family: monospace;
 	text-align: left;
 	vertical-align: middle;
 }
 
-#app_modalPopupAbout .popup_app_groupboxHeader {
+div#app_aboutPanel h1 {
+	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	text-align: left;
-	color: #4C4C4C;
-	background: #AAA url(../lib/onyx/images/gradient.png) repeat-x 0 10px;
+	vertical-align: middle;
+}
+
+#app_aboutPanel .popup_app_groupboxHeader {
+	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
+	text-align: left;
+	color: #DDD;
+	background: #101010 url(../lib/onyx/images/gradient.png) repeat-x 0 10px;
 	border: none;
 }
 
-div#app_modalPopupAbout img {
+div#app_aboutPanel img {
 	width: 30px;
 	height: 30px;
 	text-align: left;
@@ -249,10 +267,29 @@ div#app_modalPopupAbout img {
 	margin-right: 10px;
 }
 
-#app_foodlist_list_port {
-	background: url(../assets/bg.png);
+div#app_aboutPanel_aboutContent {
+	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
+	position: relative; 
+	top: 20px;
+	width: 80%;
+	max-width: 340px;
+	min-height: 30px; 
+	margin: 5px auto; 
+	padding: 15px; 
+	background: #f1f3a2; 
+	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(247,247,210,1)), to(rgba(240,242,155,1)));
+	background: -moz-linear-gradient(top,  rgba(247,247,210,1), rgba(240,242,155,1)); /* for firefox 3.6+ */ 
+	-webkit-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+    -ms-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+    border-width:0px 1px 1px 0px;
+    border-color: #000;
+    border-style:solid;
+    z-index: 2;
 }
 
+/* buttons */
 #app_buttonBack {
 	float:left; 
 }

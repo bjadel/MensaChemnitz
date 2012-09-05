@@ -42,44 +42,23 @@ enyo.kind({
 					{kind: "onyx.Tooltip", content: "Next"}
 				]}
 			]},
-			{kind: "FoodList", name: "foodlist", onSelect: "foodSelected", fit: true},
-			{name: "modalPopupAbout", classes: "onyx-sample-popup", kind: "onyx.Popup", style: "z-index: 100;", centered: true, modal: true, floating: true, onShow: "popupShown", onHide: "popupHidden", components: [ 
-				{content: "About"},
-				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
-					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Info"},
-					{ name: "authorContent", tag: "p", content: "Author: Björn Adelberg" },
-					{ name: "versionContent", tag: "p", content: "Version: 0.1.5" }					
-				]},
-				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
-					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Support"},
-					{ kind: "FittableColumns", components: [
-						{ name: "mailPicture", kind: "Image", src: "assets/mail.png"},									
-						{ name: "mailContent", tag: "p", content: "bjawebos@adelberg-online.de" }
-					]},
-					{ kind: "FittableColumns", components: [
-						{ name: "wwwPicture", kind: "Image", src: "assets/browser.png"},									
-						{ name: "homepageContent", tag: "p", content: "http://dev.adelberg-online.de" }
-					]},
-					{ kind: "FittableColumns", components: [
-						{ name: "twtPicture", kind: "Image", src: "assets/twitter.png"},									
-						{ name: "twitterContent", tag: "p", content: "https://twitter.com/bjawebos" }
-					]}										
-				]},
-				{ kind: "onyx.Button", classes: "onyx-affirmative", content: "Close", ontap: "closeModalPopup"} 
-			]}
+			{kind: "FoodList", name: "foodlist", onSelect: "foodSelected", fit: true}
 		]},
 		{kind: "FittableRows", components: [
 			{kind: "FittableColumns", noStretch: true, classes: "onyx-toolbar onyx-toolbar-inline", components: [
 				{kind: "onyx.Grabber"},
 				{kind: "Scroller", thumb: false, fit: true, touch: true, vertical: "hidden", style: "margin: 0;", components: [
 					{classes: "onyx-toolbar-inline", style: "white-space: nowrap;", components: [
-						{kind: "onyx.Button", name:"buttonBack", ontap:"buttonBack", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-back-gray.png"} ]},
+						{kind: "onyx.Button", name:"buttonBack", classes: "onyx-affirmative", ontap:"buttonBack", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-back-gray.png"} ]},
 						{kind: "onyx.Button", name:"buttonNextFood", ontap:"buttonNextFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-next-gray.png"} ]},
 						{kind: "onyx.Button", name:"buttonPreviousFood", ontap:"buttonPreviousFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-previous-gray.png"} ]}
 					]}
 				]}
 			]},
-			{kind: "Food", name: "food", arrangerKind: "CardArranger", fit: true}
+			{kind: "Panels", name: "contentPanels", draggable: false, arrangerKind: "CardSlideInArranger", fit:true, realtimeFit: true, classes: "panels-sample-panels enyo-border-box", components: [
+				{kind: "Food", name: "food", fit: true},
+				{kind: "About", name: "aboutPanel", fit: true}
+			]}
 		]}
 	],
 	create: function() {
@@ -102,12 +81,6 @@ enyo.kind({
 			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
 			this.$.buttonNextFood.setStyle("visibility:hidden;");
 		}
-		// set about content
-		this.$.mailContent.setContent(AppModel.supportMail);
-		this.$.homepageContent.setContent(AppModel.supportHomepage);
-		this.$.twitterContent.setContent(AppModel.supportTwitter);
-		this.$.authorContent.setContent("Author: " + AppModel.author);
-		this.$.versionContent.setContent("Version: " + AppModel.version);
 		// set canteen menu entries
 		this.$.stranaCanteen.setContent(StraNaCanteen.name);
 		this.$.rhCanteen.setContent(ReichenhainerCanteen.name);
@@ -117,15 +90,19 @@ enyo.kind({
 	},
 	rendered: function() {
 		this.inherited(arguments);
+		this.cleanContentPanel();
 		this.setIndex(0);
 	},
 	refresh: function() {
+		this.cleanContentPanel();
         this.$.foodlist.setDate(DateModel.getCurrentDate());
     },
     foodSelected: function(inSender, inFood) {
+    	this.cleanContentPanel();
     	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
     	this.$.food.setFood(foodEntry);
     	if (AppModel.getExistsSmallScreen()) {
+    		// do not set the index to 1 after web service call (see FoodList)
     		if (!inFood.first == 1) {
 	    		this.setIndex(1);
     		}
@@ -134,7 +111,7 @@ enyo.kind({
     settingsMenuItemSelected: function(inSender, inSettings) {
     	if ("About" == inSettings.content) {
     		// 'About' clicked
-    		this.$.modalPopupAbout.show();
+			this.addAboutPanel();    		
     	} else {
     		// canteen chosen
     		CanteenModel.setCanteen(inSettings.content);
@@ -142,45 +119,62 @@ enyo.kind({
 	    	this.refresh();
     	}
     },
-    popupHidden: function() { 
-		// FIXME: needed to hide ios keyboard 
-		document.activeElement.blur(); 
-	}, 
-	popupShown: function() {
-		// nothing to do
-	},
-	closeModalPopup: function() { 
-		this.$.modalPopupAbout.hide();
-	},
+    addAboutPanel: function() {
+    	// hide food selection buttons
+    	this.$.buttonPreviousFood.setStyle("visibility:hidden;");
+		this.$.buttonNextFood.setStyle("visibility:hidden;");
+		// set about panel
+		this.$.contentPanels.setIndex(2);
+		if (AppModel.getExistsSmallScreen()) {
+    		this.setIndex(1);
+    	}
+    },
+    cleanContentPanel: function() {
+    	if (AppModel.getExistsSmallScreen()) {
+			this.$.buttonPreviousFood.setStyle("visibility:visible;");
+			this.$.buttonNextFood.setStyle("visibility:visible;");
+		} else {
+			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
+			this.$.buttonNextFood.setStyle("visibility:hidden;");
+		}
+    	this.$.contentPanels.setIndex(0);
+    },
     formatDate: function(date) {
 		return DateModel.formatDate(date);
     },
     buttonPreviousDate: function() {
+    	this.cleanContentPanel();
         this.$.foodlist.setDate(DateModel.getPreviousDate());
         this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
     },
     buttonHomeDate: function() {
+    	this.cleanContentPanel();
     	DateModel.initialize();
         this.$.foodlist.setDate(DateModel.getCurrentDate());
         this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
     },
     buttonNextDate: function() {
+    	this.cleanContentPanel();
         this.$.foodlist.setDate(DateModel.getNextDate());
         this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
     },
     buttonPreviousFood: function() {
+    	this.cleanContentPanel();
         var foodEntry =  FoodModel.getPreviousFood();
     	this.$.food.setFood(foodEntry);
     },
     buttonNextFood: function() {
+    	this.cleanContentPanel();
     	var foodEntry = FoodModel.getNextFood();
     	this.$.food.setFood(foodEntry);
     },
     buttonBack: function() {
+    	this.cleanContentPanel();
     	this.setIndex(0);
 	},
 	backButtonHandler: function(inSender, inEvent) {
 		if (AppModel.getExistsSmallScreen()) {
+			this.cleanContentPanel();
 			this.setIndex(0);
 		}
 	},
@@ -195,7 +189,7 @@ enyo.kind({
 			this.$.buttonPreviousFood.setStyle("visibility:visible;");
 			this.$.buttonNextFood.setStyle("visibility:visible;");
 		}
-		this.render();
+		this.cleanContentPanel();
 	},
 	docKeypress: function(inSender, inEvent) {
 		//console.log("Key pressed (keyCode:"+inEvent.keyCode+")");
