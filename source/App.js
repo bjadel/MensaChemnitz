@@ -138,6 +138,9 @@ enyo.kind({
 			this.$.buttonNextFood.setStyle("visibility:hidden;");
 		}
     	this.$.contentPanels.setIndex(0);
+    	if (!AppModel.getExistsSmallScreen()) {
+    		this.setIndex(0);
+    	}
     },
     formatDate: function(date) {
 		return DateModel.formatDate(date);
@@ -190,6 +193,7 @@ enyo.kind({
 			this.$.buttonNextFood.setStyle("visibility:visible;");
 		}
 		this.cleanContentPanel();
+		this.rendered();
 	},
 	docKeypress: function(inSender, inEvent) {
 		//console.log("Key pressed (keyCode:"+inEvent.keyCode+")");

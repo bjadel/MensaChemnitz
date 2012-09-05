@@ -226,6 +226,7 @@ div#app_food_foodFee {
     border-style:solid;
     z-index: 6;
 }
+
 div#app_food_foodFee div#app_food_feeTitle {
 	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
 }
