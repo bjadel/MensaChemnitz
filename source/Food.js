@@ -41,7 +41,7 @@ enyo.kind({
 		this.$.description.setContent(inFood.description);
 		if (inFood.isPictureAvailable) {
 			if (inFood.pictureKey != "") {
-				this.$.foodPicture.setSrc("http://www-user.tu-chemnitz.de/~fnor/speiseplan/bilder_190/"+inFood.pictureKey+".png");
+				this.$.foodPicture.setSrc("http://www.swcz.de/bilderspeiseplan/bilder_190/"+inFood.pictureKey+".png");
 			}
 		}
 		this.$.feeStudent.setContent("Students: " + inFood.feeStudent.replace("?", "€"));

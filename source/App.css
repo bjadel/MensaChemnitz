@@ -233,6 +233,7 @@ div#app_food_foodFee div#app_food_feeTitle {
 
 .zoom {
 	zoom: 150%;
+	-moz-transform: scale(1.5);
 }
 
 /* About dialog */

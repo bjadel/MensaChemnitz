@@ -9,7 +9,7 @@ enyo.kind({
 	realtimeFit: true,
 	arrangerKind: "CollapsingArranger",
 	handlers: {
-		resize: "resizeHandler",
+		resize: "resizeHandler"
 	},
 	components: [
 		{kind: "enyo.Signals", onbackbutton: "backButtonHandler", onkeydown: "docKeypress" },
