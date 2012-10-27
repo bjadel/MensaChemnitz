@@ -19,7 +19,7 @@ enyo.kind({
 					{name: "zoomFoodPicture", kind: "Image", src: "assets/zoom.png", ontap: "zoomPicture"}
 				]},
 				{name: "foodFee", components: [
-					{name: "feeTitle", content: "Canteen Fees"},
+					{name: "feeTitle", content: $L('Canteen Fees')},
 					{name: "feeStudent"},
 					{name: "feeEmployee"},
 					{name: "feeGuest"}
@@ -44,9 +44,9 @@ enyo.kind({
 				this.$.foodPicture.setSrc("http://www.swcz.de/bilderspeiseplan/bilder_190/"+inFood.pictureKey+".png");
 			}
 		}
-		this.$.feeStudent.setContent("Students: " + inFood.feeStudent.replace("?", "€"));
-		this.$.feeEmployee.setContent("Employees: " + inFood.feeEmployee.replace("?", "€"));
-		this.$.feeGuest.setContent("Guests: " + inFood.feeGuest.replace("?", "€"));
+		this.$.feeStudent.setContent($L('Students:') + " " + inFood.feeStudent + " €");
+		this.$.feeEmployee.setContent($L('Employees:') + " " + inFood.feeEmployee + " €");
+		this.$.feeGuest.setContent($L('Guests:') + " " + inFood.feeGuest + " €");
 	},
 	zoomPicture: function(inSender) {
 		if (this.zoomed == 0) {

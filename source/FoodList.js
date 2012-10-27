@@ -96,7 +96,7 @@ enyo.kind({
 				// description
 				this.$.foodItemDescription.setContent(foodEntry.description);
 				// fee
-				var feeList = "S: "+foodEntry.feeStudent.replace("?", "€")+" M: "+foodEntry.feeEmployee.replace("?", "€")+" G: "+foodEntry.feeGuest.replace("?", "€");
+				var feeList = "S: "+foodEntry.feeStudent+" € M: "+foodEntry.feeEmployee+" € G: "+foodEntry.feeGuest+" €";
 				this.$.foodItemFeeList.setContent(feeList);
 				return true;
 			} else {

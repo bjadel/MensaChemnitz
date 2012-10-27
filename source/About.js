@@ -9,7 +9,7 @@ enyo.kind({
 	components: [
 		{kind: "Scroller", horizontal:"hidden", fit: true, touch: true, classes: "scroller-sample-scroller enyo-fit", components: [
 			{kind: "FittableRows", name: "aboutContent", centered: true, components: [
-				{content: "About", tag: "h1"},
+				{name: "aboutTitle", content: $L('About'), tag: "h1"},
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Info"},
 					{ name: "authorContent", tag: "p", content: "Author: Björn Adelberg" },
@@ -38,6 +38,7 @@ enyo.kind({
 		AppModel.initialize();
 		AppModel.setExistsSmallScreen();
 		// set about content
+		this.$.aboutTitle.setContent($L('About'));
 		this.$.mailContent.setContent(AppModel.supportMail);
 		this.$.homepageContent.setContent(AppModel.supportHomepage);
 		if (AppModel.getExistsSmallScreen()) {
@@ -45,7 +46,7 @@ enyo.kind({
 		} else {
 			this.$.twitterContent.setContent(AppModel.supportTwitter);
 		}
-		this.$.authorContent.setContent("Author: " + AppModel.author);
+		this.$.authorContent.setContent($L('Author:') + " " + AppModel.author);
 		this.$.versionContent.setContent("Version: " + AppModel.version);
 	},
 	rendered: function() {

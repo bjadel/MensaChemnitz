@@ -7,7 +7,7 @@ var FoodModel = ({
     	this.foodList = [];
     	this.rotateCounter = 0;
 	},
-	addFood: function(category, description, rating, feeStudent, feeEmployee, feeGuest, isPictureAvailable, pictureKey) {
+	addFood: function(category, description, rating, feeStudent, feeEmployee, feeGuest, isPictureAvailable, pictureKey, pig, cow, alc, veg) {
 		this.foodList.push({
 			category:category, 
 			description:description,
@@ -16,7 +16,11 @@ var FoodModel = ({
 			feeEmployee:feeEmployee, 
 			feeGuest:feeGuest,
 			isPictureAvailable:isPictureAvailable,
-			pictureKey:pictureKey
+			pictureKey:pictureKey,
+			pig:pig,
+			cow:cow,
+			alc:alc,
+			veg:veg
 		});
 	},
 	getLastClickedFood: function() {

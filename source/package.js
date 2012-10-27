@@ -1,6 +1,7 @@
 enyo.depends(
 	"$lib/layout",
 	"$lib/onyx",
+	"$lib/g11n",
 	"App.css",
 	"App.js",
 	"Food.js",

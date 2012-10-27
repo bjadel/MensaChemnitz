@@ -21,25 +21,25 @@ enyo.kind({
 			{kind: "FittableColumns", components: [
 				{kind: "onyx.MenuDecorator", fit: "true", onSelect: "settingsMenuItemSelected", components: [ 
 					{name: "menuCanteen", content: "", components: [{kind: "onyx.Icon", src: "assets/settings.png"}]},
-					{kind: "onyx.Tooltip", content: "Settings such as canteen selection"},
+					{kind: "onyx.Tooltip", content: $L('Settings such as canteen selection')},
 					{kind: "onyx.Menu", floating: true, components: [ 
 						{name: "stranaCanteen", content: ""}, 
 						{name: "rhCanteen", content: ""},
 						{classes: "onyx-menu-divider"},
-						{content: "About"}
+						{content: $L('About')}
 					]}
 				]},
 				{kind: "onyx.TooltipDecorator", components: [
 					{kind: "onyx.Button", name:"buttonPreviousDate", ontap:"buttonPreviousDate", components: [ {kind: "onyx.Icon", src: "assets/go-previous.png"} ]},
-					{kind: "onyx.Tooltip", content: "Previous"} 
+					{kind: "onyx.Tooltip", content: $L('Previous')} 
 				]},
 				{kind: "onyx.TooltipDecorator", components: [
 					{kind: "onyx.Button", name:"buttonHomeDate", ontap:"buttonHomeDate", components: [ {kind: "onyx.Icon", src: "assets/go-home.png"} ]},
-					{kind: "onyx.Tooltip", content: "Today"}
+					{kind: "onyx.Tooltip", content: $L('Today')}
 				]},
 				{kind: "onyx.TooltipDecorator", components: [
 					{kind: "onyx.Button", name:"buttonNextDate", ontap:"buttonNextDate", components: [ {kind: "onyx.Icon", src: "assets/go-next.png"} ]},
-					{kind: "onyx.Tooltip", content: "Next"}
+					{kind: "onyx.Tooltip", content: $L('Next')}
 				]}
 			]},
 			{kind: "FoodList", name: "foodlist", onSelect: "foodSelected", fit: true}
@@ -109,7 +109,7 @@ enyo.kind({
     	}
     },
     settingsMenuItemSelected: function(inSender, inSettings) {
-    	if ("About" == inSettings.content) {
+    	if ($L('About') == inSettings.content) {
     		// 'About' clicked
 			this.addAboutPanel();    		
     	} else {
