@@ -181,7 +181,7 @@ div#app_food_foodname {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	color: #fff;
 	position: relative; 
-	top: 20px;
+	top: 15px;
 	width: 80%;
 	max-width: 370px;
 	min-height: 30px; 
@@ -190,10 +190,10 @@ div#app_food_foodname {
 	background: #2d3127; 
 	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(45, 49, 39, 1)), to(rgba(58, 63, 51, 1)));
 	background: -moz-linear-gradient(top,  rgba(45, 49, 39, 1), rgba(58, 63, 51, 1)); /* for firefox 3.6+ */ 
-	-webkit-transform: rotate(-8deg);
-    -moz-transform: rotate(-8deg);
-    -ms-transform: rotate(-8deg);
-    transform: rotate(-8deg);
+	-webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
     border-width: 14px 16px;
     border-style: solid;
     -moz-border-image: url(../assets/borderimage.png) 14 16 stretch;
@@ -219,7 +219,7 @@ div#app_food_foodFee {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	color: #fff;
 	position: absolute; 
-	left: 35%;
+	left: 28%;
 	width: 210px; 
 	min-height: 30px; 
 	margin: 5px auto; 
