@@ -179,6 +179,7 @@ div#app_food {
 
 div#app_food_foodname {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
+	color: #fff;
 	position: relative; 
 	top: 20px;
 	width: 80%;
@@ -186,16 +187,19 @@ div#app_food_foodname {
 	min-height: 30px; 
 	margin: 5px auto; 
 	padding: 15px; 
-	background: #f1f3a2; 
-	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(247,247,210,1)), to(rgba(240,242,155,1)));
-	background: -moz-linear-gradient(top,  rgba(247,247,210,1), rgba(240,242,155,1)); /* for firefox 3.6+ */ 
+	background: #2d3127; 
+	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(45, 49, 39, 1)), to(rgba(58, 63, 51, 1)));
+	background: -moz-linear-gradient(top,  rgba(45, 49, 39, 1), rgba(58, 63, 51, 1)); /* for firefox 3.6+ */ 
 	-webkit-transform: rotate(-8deg);
     -moz-transform: rotate(-8deg);
     -ms-transform: rotate(-8deg);
     transform: rotate(-8deg);
-    border-width:0px 1px 1px 0px;
-    border-color: #000;
-    border-style:solid;
+    border-width: 14px 16px;
+    border-style: solid;
+    -moz-border-image: url(../assets/borderimage.png) 14 16 stretch;
+    -webkit-border-image: url(../assets/borderimage.png) 14 16 stretch;
+    -o-border-image: url(../assets/borderimage.png) 14 16 stretch;
+    border-image: url(../assets/borderimage.png) 14 16 stretch;
     z-index: 7;
 }
 div#app_food_foodname div#app_food_fooddate {
@@ -206,8 +210,14 @@ div#app_food_foodname div#app_food_foodtitle {
 	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
 }
 
+div#app_food_foodname div#app_food_ingredientsBox img {
+	width: 20px;
+	height: 20px;
+}
+
 div#app_food_foodFee {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
+	color: #fff;
 	position: absolute; 
 	left: 35%;
 	width: 210px; 
@@ -215,15 +225,18 @@ div#app_food_foodFee {
 	margin: 5px auto; 
 	padding: 15px; 
 	background: #f1f3a2; 
-	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(247,247,210,1)), to(rgba(240,242,155,1)));
-	background: -moz-linear-gradient(top,  rgba(247,247,210,1), rgba(240,242,155,1)); /* for firefox 3.6+ */ 
+	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(45, 49, 39, 1)), to(rgba(58, 63, 51, 1)));
+	background: -moz-linear-gradient(top,  rgba(45, 49, 39, 1), rgba(58, 63, 51, 1)); /* for firefox 3.6+ */ 
 	-webkit-transform: rotate(7deg);
     -moz-transform: rotate(7deg);
     -ms-transform: rotate(7deg);
     transform: rotate(7deg);
-    border-width:0px 1px 1px 0px;
-    border-color: #000;
-    border-style:solid;
+    border-width: 14px 16px;
+    border-style: solid;
+    -moz-border-image: url(../assets/borderimage.png) 14 16 stretch;
+    -webkit-border-image: url(../assets/borderimage.png) 14 16 stretch;
+    -o-border-image: url(../assets/borderimage.png) 14 16 stretch;
+    border-image: url(../assets/borderimage.png) 14 16 stretch;
     z-index: 6;
 }
 
