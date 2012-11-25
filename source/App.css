@@ -224,7 +224,7 @@ div#app_food_foodFee {
 	min-height: 30px; 
 	margin: 5px auto; 
 	padding: 15px; 
-	background: #f1f3a2; 
+	background: #2d3127; 
 	background:	-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(45, 49, 39, 1)), to(rgba(58, 63, 51, 1)));
 	background: -moz-linear-gradient(top,  rgba(45, 49, 39, 1), rgba(58, 63, 51, 1)); /* for firefox 3.6+ */ 
 	-webkit-transform: rotate(7deg);
