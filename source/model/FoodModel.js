@@ -33,7 +33,11 @@ var FoodModel = ({
 		return this.foodList[index];
 	},
 	getSize: function() {
-		return this.foodList.length;
+		if (this.foodList === undefined) {
+			return 0;
+		} else {
+			return this.foodList.length;
+		}
 	},
 	getNextFood: function() {
 		this.rotateCounter++;

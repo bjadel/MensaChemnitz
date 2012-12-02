@@ -15,28 +15,29 @@ enyo.kind({
 			contentType: "text/xml",
 			onResponse: "gotMenu",
 			onError: "gotMenuFailure"},
-		{kind: "List", fit: true, touch: true, onSetupItem: "setupItem", 
-			components:	[
-				{name: "item", classes: "item", ontap: "itemTap", components: [
-					{name: "index", classes: "list-sample-index"},
-					{kind: "FittableColumns", components: [
-						{kind: "FittableRows", centered: true, style: "text-align: center;", components: [
-							{name:"image", components: [
-								{name: "foodImage", kind: "Image", style: "width: 70px; height: 70px;", src: "assets/0.png", onerror: "imageError"}
-							]}, 
-							{name: "ratingImage", kind: "Image", style: "visibility: hidden;", src: "", onerror: "imageError"}
-						]},
-						{name: "description", components: [ 
-							{kind: "FittableRows", components: [
-								{name: "name"},
-								{name: "foodItemDescription"},
-								{name: "foodItemFeeList"}
-							]} 
+		{kind: "Scroller", fit: true, touch: true, classes: "scroller-sample-scroller enyo-fit", components: [
+			{name: "list", kind: "Repeater", count: 1, fit: true, touch: true, onSetupItem: "setupItem", 
+				components:	[
+					{name: "item", classes: "item", ontap: "itemTap", components: [
+						{kind: "FittableColumns", components: [
+							{kind: "FittableRows", centered: true, style: "text-align: center;", components: [
+								{name:"image",  components: [
+									{name: "foodImage", kind: "Image", classes: "food_image", src: "assets/0.png", onerror: "imageError" }
+								]}, 
+								{name: "ratingImage", kind: "Image", style: "visibility: hidden;", src: "", onerror: "imageError"}
+							]},
+							{name: "description", classes: "description_box", components: [ 
+								{kind: "FittableRows", components: [
+									{name: "name", classes: "food_name"},
+									{name: "foodItemDescription", classes: "food_description"},
+									{name: "foodItemFeeList", classes: "food_fee"}
+								]} 
+							]}
 						]}
 					]}
-				]}
-			]
-		}
+				]
+			}
+		]},
 	],
 	setCount: function(counter) {
 		this.$.list.setCount(counter);
@@ -60,53 +61,61 @@ enyo.kind({
 		console.log("got failure from getMenu");
 		CanteenService.getError();
 		this.doSelect({index: 0, first: 1});
+		this.$.list.setCount(FoodModel.getSize());
+		this.render();
 	},
-	setupItem: function(inSender, inIndex) {
-		var i = inIndex.index;
+	setupItem: function(inSender, inEvent) {
+		var i = inEvent.index;
+    	var item = inEvent.item;
 		if (i < FoodModel.getSize()) {
 			var foodEntry = FoodModel.getFoodByIndex(i, false);
-			// apply selection style if inSender (the list) indicates that this row is selected.
-			this.$.item.addRemoveClass("onyx-selected", inSender.isSelected(i)); 
+			if (i == 0) {
+				item.children[0].addRemoveClass("onyx-selected", 1);
+			}
 			if (foodEntry) {
 				if (foodEntry.isPictureAvailable) {
 					if (foodEntry.pictureKey != "") {
-						this.$.foodImage.setSrc("http://www.swcz.de/bilderspeiseplan/bilder_190/"+foodEntry.pictureKey+".png");
+						item.$.foodImage.setSrc("http://www.swcz.de/bilderspeiseplan/bilder_190/"+foodEntry.pictureKey+".png");
 					}
 				}
 				// rating
 				if (foodEntry.rating != "" && foodEntry.rating > 0) {
-					this.$.ratingImage.setStyle("visibility:visible;");
+					item.$.ratingImage.setStyle("visibility:visible;");
 					if (foodEntry.rating == 1) {
-						this.$.ratingImage.setSrc("assets/rating-1.png");
+						item.$.ratingImage.setSrc("assets/rating-1.png");
 					} else if (foodEntry.rating == 2) {
-						this.$.ratingImage.setSrc("assets/rating-2.png");
+						item.$.ratingImage.setSrc("assets/rating-2.png");
 					} else if (foodEntry.rating == 3) {
-						this.$.ratingImage.setSrc("assets/rating-3.png");
+						item.$.ratingImage.setSrc("assets/rating-3.png");
 					} else if (foodEntry.rating == 4) {
-						this.$.ratingImage.setSrc("assets/rating-4.png");
+						item.$.ratingImage.setSrc("assets/rating-4.png");
 					} else if (foodEntry.rating == 5) {
-						this.$.ratingImage.setSrc("assets/rating-5.png");
+						item.$.ratingImage.setSrc("assets/rating-5.png");
 					}
 				} else {
-					this.$.ratingImage.setStyle("visibility:hidden;");
-					this.$.ratingImage.setSrc("");
+					item.$.ratingImage.setStyle("visibility:hidden;");
+					item.$.ratingImage.setSrc("");
 				}
 				// category
-				this.$.name.setContent(foodEntry.category);
+				item.$.name.setContent(foodEntry.category);
 				// description
-				this.$.foodItemDescription.setContent(foodEntry.description);
+				item.$.foodItemDescription.setContent(foodEntry.description);
 				// fee
 				var feeList = "S: "+foodEntry.feeStudent+" € M: "+foodEntry.feeEmployee+" € G: "+foodEntry.feeGuest+" €";
-				this.$.foodItemFeeList.setContent(feeList);
-				return true;
+				item.$.foodItemFeeList.setContent(feeList);
 			} else {
 				this.$.name.setContent("");
-				return true;
 			}
 		}
+		return true;
 	},
 	itemTap: function(inSender, inEvent) {
-		
+		var repeaterItems = inSender.parent.parent.children;
+		enyo.forEach(repeaterItems, function(item) {
+			item.children[0].addRemoveClass("onyx-selected", 0);
+		});
+		inSender.addRemoveClass("onyx-selected", 1);
+		this.doSelect(inEvent);
 	},
 	setDate: function(inDate) {
 		var year = inDate.getFullYear();

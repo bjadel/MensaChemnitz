@@ -81,40 +81,28 @@
 
 /* food list */
 
-#app_foodlist_list_port {
+#app_foodlist {
 	background: url(../assets/bg.png);
 }
 
-#app_foodlist_image {
+#app_foodlist_list .food_image {
+	width: 70px; 
+	height: 70px;
 }
 
-/* small size */
-.small_screen#app_food_largeFoodImage {
-	width: 220px; 
-	height: 220px;
-	margin: 10px; 
-}
-
-/* normal size*/
-#app_food_largeFoodImage {
-	width: 350px; 
-	height: 350px;
-	margin: 10px; 
-}
-
-#app_foodlist_description {
+#app_foodlist_list .description_box {
 	padding: 10px;
 	width: 250px;
 }
 
-#app_foodlist_description #app_foodlist_name {
+.description_box .food_name {
 	font-weight: bolder;
 }
 
-#app_foodlist_description #app_foodlist_foodItemDescription {
+.description_box .food_description {
 }
 
-#app_foodlist_description #app_foodlist_foodItemFeeList {
+.description_box .food_fee {
 	font-family: monospace;
 	font-size: smaller;
 }
