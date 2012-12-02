@@ -15,7 +15,7 @@ enyo.kind({
 			contentType: "text/xml",
 			onResponse: "gotMenu",
 			onError: "gotMenuFailure"},
-		{kind: "Scroller", fit: true, touch: true, classes: "scroller-sample-scroller enyo-fit", components: [
+		{kind: "Scroller", fit: true, touch: true, horizontal: "hidden", classes: "scroller-sample-scroller enyo-fit", components: [
 			{name: "list", kind: "Repeater", count: 1, fit: true, touch: true, onSetupItem: "setupItem", 
 				components:	[
 					{name: "item", classes: "item", ontap: "itemTap", components: [
