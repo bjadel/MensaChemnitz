@@ -39,7 +39,9 @@ enyo.kind({
 	},
 	setFood: function(inFood) {
 		if (AppModel.getExistsSmallScreen()) {
-			this.$.foodPictureWrapper.setClasses("small_screen");
+			this.$.foodPictureWrapper.addRemoveClass("small_screen", true);
+		} else {
+			this.$.foodPictureWrapper.addRemoveClass("small_screen", false);
 		}
 		this.selectedFood = inFood;
 		this.$.fooddate.setContent(DateModel.formatDate(DateModel.getCurrentDate()));
