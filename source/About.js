@@ -13,7 +13,7 @@ enyo.kind({
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Info"},
 					{ name: "authorContent", tag: "p", content: "Author: Björn Adelberg" },
-					{ name: "versionContent", tag: "p", content: "Version: 0.1.5" }					
+					{ name: "versionContent", tag: "p" }					
 				]},
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Support"},
@@ -22,13 +22,17 @@ enyo.kind({
 						{ name: "mailContent", tag: "p", content: "bjawebos@adelberg-online.de" }
 					]},
 					{ kind: "FittableColumns", components: [
-						{ name: "wwwPicture", kind: "Image", src: "assets/browser.png"},									
-						{ name: "homepageContent", tag: "p", content: "http://dev.adelberg-online.de" }
+						{ name: "wwwPicture", kind: "Image", src: "assets/browser.png" },									
+						{ name: "homepageContent", tag: "p", allowHtml: true }
 					]},
 					{ kind: "FittableColumns", components: [
-						{ name: "twtPicture", kind: "Image", src: "assets/twitter.png"},									
-						{ name: "twitterContent", tag: "p", content: "https://twitter.com/bjawebos" }
-					]}		
+						{ name: "twtPicture", kind: "Image", src: "assets/twitter.png" },									
+						{ name: "twitterContent", tag: "p", allowHtml: true}
+					]},
+					{ kind: "FittableColumns", components: [
+						{ name: "fbPicture", kind: "Image", src: "assets/f_logo.png" },									
+						{ name: "fbContent", tag: "p", allowHtml: true}
+					]}
 				]}
 			]}
 		]}
@@ -48,8 +52,6 @@ enyo.kind({
 		}
 		this.$.authorContent.setContent($L('Author:') + " " + AppModel.author);
 		this.$.versionContent.setContent("Version: " + AppModel.version);
+		this.$.fbContent.setContent(AppModel.supportFacebook);
 	},
-	rendered: function() {
-		this.inherited(arguments);
-	}
 });

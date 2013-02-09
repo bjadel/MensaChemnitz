@@ -16,6 +16,10 @@
 	}
 }
 
+.splashscreen {
+	background: #000 url(../assets/crossplatform/icon_200.png) top center no-repeat;
+}
+
 #app {
 	
 }
@@ -58,6 +62,10 @@
 
 .collapsible > * {
 	min-width: 250px;
+}
+
+.onyx-spinner.onyx-dark {
+  background-color: #333;
 }
 
 .onyx-sample-popup { 
@@ -125,18 +133,17 @@ div#app_food {
 	text-align: center;
 }
 
-#app_food_foodPictureWrapper #app_food_foodPicture {
+#app_food_foodPictureWrapper .app_food_foodPicture {
 	z-index: 4;
 	width: 190px; /* Breite des Elements */
    	height: 190px; /* Höhe des Elements */
+   	display: inline-block;
 }
 
-#app_food_foodPictureWrapper #app_food_zoomFoodPicture {
-	z-index: 5;
-	width: 48px; /* Breite des Elements */
-   	height: 48px; /* Höhe des Elements */
-   	position: relative;
-   	left: -44px;
+#app_food_foodPictureWrapper .onyx-spinner {
+	z-index: 4;
+	position: relative;
+	top: 70px;
 }
 
 /* small size */
@@ -151,18 +158,17 @@ div#app_food {
 	text-align: center;
 }
 
-.small_screen#app_food_foodPictureWrapper #app_food_foodPicture {
+.small_screen#app_food_foodPictureWrapper .app_food_foodPicture {
 	z-index: 4;
 	width: 130px; /* Breite des Elements */
    	height: 130px; /* Höhe des Elements */
+   	display: inline-block;
 }
 
-.small_screen#app_food_foodPictureWrapper #app_food_zoomFoodPicture {
-	z-index: 5;
-	width: 48px; /* Breite des Elements */
-   	height: 48px; /* Höhe des Elements */
-   	position: relative;
-   	left: -20px;
+.small_screen#app_food_foodPictureWrapper .onyx-spinner {
+	z-index: 4;
+	position: relative;
+	top: 35px;
 }
 
 div#app_food_foodname {
@@ -230,11 +236,6 @@ div#app_food_foodFee {
 
 div#app_food_foodFee div#app_food_feeTitle {
 	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
-}
-
-.zoom {
-	zoom: 150%;
-	-moz-transform: scale(1.5);
 }
 
 /* About dialog */

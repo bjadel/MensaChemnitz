@@ -7,6 +7,7 @@ enyo.depends(
 	"Food.js",
 	"FoodList.js",
 	"About.js",
+	"Picture.js",
 	"model/FoodModel.js",
 	"model/CanteenModel.js",
 	"model/CanteenService.js",

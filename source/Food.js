@@ -21,8 +21,7 @@ enyo.kind({
 					]}
 				]},
 				{name: "foodPictureWrapper", kind: "FittableRows", components: [
-					{name: "foodPicture", kind: "Image", src: "assets/0.png", onerror: "imageError"},
-					{name: "zoomFoodPicture", kind: "Image", src: "assets/zoom.png", ontap: "zoomPicture"}
+					{name: "foodPicture", kind: "Picture", currentSrc: "assets/0.png", pictureClasses: "app_food_foodPicture"}
 				]},
 				{name: "foodFee", components: [
 					{name: "feeTitle", content: $L('Canteen Fees')},
@@ -33,10 +32,6 @@ enyo.kind({
 			]}
 		]}
 	],
-	create: function(inControl) {
-		this.inherited(arguments);
-		this.zoomed = 0;
-	},
 	setFood: function(inFood) {
 		if (AppModel.getExistsSmallScreen()) {
 			this.$.foodPictureWrapper.addRemoveClass("small_screen", true);
@@ -50,7 +45,7 @@ enyo.kind({
 		// picture
 		if (inFood.isPictureAvailable) {
 			if (inFood.pictureKey != "") {
-				this.$.foodPicture.setSrc("http://www.swcz.de/bilderspeiseplan/bilder_190/"+inFood.pictureKey+".png");
+				this.$.foodPicture.replace("http://www.swcz.de/bilderspeiseplan/bilder_190/"+inFood.pictureKey+".png");
 			}
 		}
 		// ingredients
@@ -79,17 +74,6 @@ enyo.kind({
 		this.$.feeEmployee.setContent($L('Employees:') + " " + inFood.feeEmployee + " €");
 		this.$.feeGuest.setContent($L('Guests:') + " " + inFood.feeGuest + " €");
 	},
-	zoomPicture: function(inSender) {
-		if (this.zoomed == 0) {
-			this.$.zoomFoodPicture.setSrc("assets/negativezoom.png");
-			this.$.foodContent.addRemoveClass("zoom", true);
-			this.zoomed = 1;
-		} else {
-			this.$.zoomFoodPicture.setSrc("assets/zoom.png");
-			this.$.foodContent.addRemoveClass("zoom", false);
-			this.zoomed = 0;
-		}
-	},
 	addToStage: function(picUrl) {
 		if (this.$.stage1.src == "") {
 			this.$.stage1.setSrc(picUrl)
@@ -104,8 +88,5 @@ enyo.kind({
 			this.$.stage4.setSrc(picUrl)
 			this.$.stage4.show();
 		}
-	},
-	imageError: function(inSender, inEvent) {
-		inEvent.currentTarget.src = "assets/0.png";
 	}
 });

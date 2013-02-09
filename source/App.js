@@ -12,7 +12,7 @@ enyo.kind({
 		resize: "resizeHandler"
 	},
 	components: [
-		{kind: "enyo.Signals", onbackbutton: "backButtonHandler", onkeydown: "docKeypress" },
+		{kind: "enyo.Signals", onbackbutton: "backButtonHandler", onkeydown: "docKeypress", ondeviceready: "deviceready" },
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
 				{name: "title", content: "Chemnitz", style: "width: 90%;"},
@@ -65,6 +65,7 @@ enyo.kind({
 		this.inherited(arguments);
 		DateModel.initialize();
 		CanteenModel.initialize();
+		FoodModel.initialize();
 		AppModel.initialize();
 		AppModel.setExistsSmallScreen();
 		// When ready...
@@ -84,8 +85,6 @@ enyo.kind({
 		// set canteen menu entries
 		this.$.stranaCanteen.setContent(StraNaCanteen.name);
 		this.$.rhCanteen.setContent(ReichenhainerCanteen.name);
-		// set size of foodList
-		this.$.foodlist.setCount(50);
 		this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
 	},
 	rendered: function() {
@@ -176,9 +175,14 @@ enyo.kind({
     	this.setIndex(0);
 	},
 	backButtonHandler: function(inSender, inEvent) {
-		if (AppModel.getExistsSmallScreen()) {
-			this.cleanContentPanel();
-			this.setIndex(0);
+		if (AppModel.getIsAndroid()) {
+			if (this.getIndex() < 1) {
+				navigator.app.exitApp(); 
+			}
+			if (AppModel.getExistsSmallScreen()) {
+				this.cleanContentPanel();
+				this.setIndex(0);
+			}
 		}
 	},
 	resizeHandler: function(inSender, inEvent) {

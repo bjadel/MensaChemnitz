@@ -21,9 +21,7 @@ enyo.kind({
 					{name: "item", classes: "item", ontap: "itemTap", components: [
 						{kind: "FittableColumns", components: [
 							{kind: "FittableRows", centered: true, style: "text-align: center;", components: [
-								{name:"image",  components: [
-									{name: "foodImage", kind: "Image", classes: "food_image", src: "assets/0.png", onerror: "imageError" }
-								]}, 
+								{name: "foodImage", kind: "Picture", pictureClasses: "food_image", spinnerClasses: "onyx-dark", currentSrc: "assets/0.png"}, 
 								{name: "ratingImage", kind: "Image", style: "visibility: hidden;", src: "", onerror: "imageError"}
 							]},
 							{name: "description", classes: "description_box", components: [ 
@@ -41,10 +39,6 @@ enyo.kind({
 	],
 	setCount: function(counter) {
 		this.$.list.setCount(counter);
-	},
-	create: function() {
-		this.inherited(arguments);
-		FoodModel.initialize();
 	},
 	initialize: function(year, month, day) {
 		this.url=CanteenService.getUrl(year, month, day);
@@ -75,7 +69,7 @@ enyo.kind({
 			if (foodEntry) {
 				if (foodEntry.isPictureAvailable) {
 					if (foodEntry.pictureKey != "") {
-						item.$.foodImage.setSrc("http://www.swcz.de/bilderspeiseplan/bilder_190/"+foodEntry.pictureKey+".png");
+						item.$.foodImage.replace("http://www.swcz.de/bilderspeiseplan/bilder_190/"+foodEntry.pictureKey+".png");
 					}
 				}
 				// rating
