@@ -16,6 +16,14 @@
 	}
 }
 
+@font-face {
+  font-family: 'Courgette';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/Courgette.eot');
+  src: local('Courgette'), local('Courgette'), url('../assets/fonts/Courgette.ttf') format('truetype');
+}
+
 .splashscreen {
 	background: #000 url(../assets/crossplatform/icon_200.png) top center no-repeat;
 }

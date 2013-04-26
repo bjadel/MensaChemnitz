@@ -46,13 +46,12 @@ enyo.kind({
 		this.$.getMenu.send();
 	},
 	gotMenu: function(inSender, inResponse) {
-	  	CanteenService.getCanteenMenu(inSender, inResponse);
-	    this.doSelect({index: 0, first: 1});
+		CanteenService.getCanteenMenu(inSender, inResponse);
+		this.doSelect({index: 0, first: 1});
 	    this.$.list.setCount(FoodModel.getSize());
 	    this.render();
 	},
 	gotMenuFailure: function(inSender, inResponse) {
-		console.log("got failure from getMenu");
 		CanteenService.getError();
 		this.doSelect({index: 0, first: 1});
 		this.$.list.setCount(FoodModel.getSize());

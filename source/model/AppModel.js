@@ -3,7 +3,7 @@
  */
 var AppModel = ({
 	initialize: function()  {
-		this.version = "0.3.0";
+		this.version = "0.3.2";
     	this.author = "Björn Adelberg";
     	this.supportMail = "bjawebos@adelberg-online.de";
     	
@@ -33,5 +33,8 @@ var AppModel = ({
 	},
 	getIsAndroid: function() {
 		return this.isAndroid;
+	},
+	getIsWebOS: function() {
+		return this.isWebOS;
 	}
 });

@@ -63,7 +63,20 @@ enyo.kind({
 	],
 	create: function() {
 		this.inherited(arguments);
-		DateModel.initialize();
+	},
+	rendered: function() {
+		this.inherited(arguments);
+		this.setIndex(0);
+	},
+	asyncInitialize: function() {
+		this.initialize();
+		this.$.foodlist.setDate(DateModel.getCurrentDate());
+	},
+	asyncCallDate: function(date) {
+	 	this.$.foodlist.setDate(date);
+	},
+    initialize: function() {
+    	DateModel.initialize();
 		CanteenModel.initialize();
 		FoodModel.initialize();
 		AppModel.initialize();
@@ -86,18 +99,14 @@ enyo.kind({
 		this.$.stranaCanteen.setContent(StraNaCanteen.name);
 		this.$.rhCanteen.setContent(ReichenhainerCanteen.name);
 		this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
-	},
-	rendered: function() {
-		this.inherited(arguments);
-		this.cleanContentPanel();
-		this.setIndex(0);
-	},
+    },
 	refresh: function() {
 		this.cleanContentPanel();
-        this.$.foodlist.setDate(DateModel.getCurrentDate());
+		enyo.asyncMethod(this, "asyncInitialize");
     },
     foodSelected: function(inSender, inFood) {
     	this.cleanContentPanel();
+    	this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
     	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
     	this.$.food.setFood(foodEntry);
     	if (AppModel.getExistsSmallScreen()) {
@@ -146,19 +155,16 @@ enyo.kind({
     },
     buttonPreviousDate: function() {
     	this.cleanContentPanel();
-        this.$.foodlist.setDate(DateModel.getPreviousDate());
-        this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
+    	enyo.asyncMethod(this, "asyncCallDate", DateModel.getPreviousDate());
     },
     buttonHomeDate: function() {
     	this.cleanContentPanel();
     	DateModel.initialize();
-        this.$.foodlist.setDate(DateModel.getCurrentDate());
-        this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
+    	enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());
     },
     buttonNextDate: function() {
     	this.cleanContentPanel();
-        this.$.foodlist.setDate(DateModel.getNextDate());
-        this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
+    	enyo.asyncMethod(this, "asyncCallDate", DateModel.getNextDate());
     },
     buttonPreviousFood: function() {
     	this.cleanContentPanel();
