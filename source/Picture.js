@@ -22,7 +22,6 @@ enyo.kind({
 		this.$.pic.addRemoveClass(this.pictureClasses, true);
 		this.$.pic.setDisableZoom(this.disableZoom);
 		this.$.pic.hide();
-		this.$.spinner.start();
 	},
 	replace: function(url) {
 		this.$.pic.hide();
