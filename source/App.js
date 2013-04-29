@@ -69,17 +69,20 @@ enyo.kind({
 		this.setIndex(0);
 	},
 	asyncInitialize: function() {
+		// core init
+		DateModel.initialize();
+		CanteenModel.initialize();
+		FoodModel.initialize();
+		AppModel.initialize();
+		// get data from service
+		enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());
+		// extended init
 		this.initialize();
-		this.$.foodlist.setDate(DateModel.getCurrentDate());
 	},
 	asyncCallDate: function(date) {
 	 	this.$.foodlist.setDate(date);
 	},
     initialize: function() {
-    	DateModel.initialize();
-		CanteenModel.initialize();
-		FoodModel.initialize();
-		AppModel.initialize();
 		AppModel.setExistsSmallScreen();
 		// When ready...
 		window.addEventListener("load",function() {
