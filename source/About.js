@@ -54,4 +54,7 @@ enyo.kind({
 		this.$.versionContent.setContent("Version: " + AppModel.version);
 		this.$.fbContent.setContent(AppModel.supportFacebook);
 	},
+	rendered: function() {
+		this.inherited(arguments);
+	} 
 });

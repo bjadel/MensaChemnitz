@@ -21,7 +21,7 @@ enyo.kind({
 					]}
 				]},
 				{name: "foodPictureWrapper", kind: "FittableRows", components: [
-					{name: "foodPicture", kind: "Picture", currentSrc: "assets/0.png", pictureClasses: "app_food_foodPicture"}
+					{name: "foodPicture", kind: "Picture" }
 				]},
 				{name: "foodFee", components: [
 					{name: "feeTitle", content: $L('Canteen Fees')},
@@ -32,6 +32,10 @@ enyo.kind({
 			]}
 		]}
 	],
+	create: function(inControl) {
+		this.inherited(arguments);
+		this.zoomed = 0;
+	},
 	setFood: function(inFood) {
 		if (AppModel.getExistsSmallScreen()) {
 			this.$.foodPictureWrapper.addRemoveClass("small_screen", true);

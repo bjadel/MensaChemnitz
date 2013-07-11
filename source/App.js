@@ -12,7 +12,7 @@ enyo.kind({
 		resize: "resizeHandler"
 	},
 	components: [
-		{kind: "enyo.Signals", onbackbutton: "backButtonHandler", onkeydown: "docKeypress", ondeviceready: "deviceready" },
+		{kind: "enyo.Signals", onkeydown: "docKeypress" },
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
 				{name: "title", content: "Chemnitz", style: "width: 90%;"},
@@ -23,8 +23,8 @@ enyo.kind({
 					{name: "menuCanteen", content: "", components: [{kind: "onyx.Icon", src: "assets/settings.png"}]},
 					{kind: "onyx.Tooltip", content: $L('Settings such as canteen selection')},
 					{kind: "onyx.Menu", floating: true, components: [ 
-						{name: "stranaCanteen", content: ""}, 
-						{name: "rhCanteen", content: ""},
+						{name: "stranaCanteen", content: "Straße der Nationen"}, 
+						{name: "rhCanteen", content: "Reichenhainer"},
 						{classes: "onyx-menu-divider"},
 						{content: $L('About')}
 					]}
@@ -72,7 +72,6 @@ enyo.kind({
 		// core init
 		DateModel.initialize();
 		CanteenModel.initialize();
-		FoodModel.initialize();
 		AppModel.initialize();
 		// get data from service
 		enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());
@@ -127,7 +126,7 @@ enyo.kind({
     		// canteen chosen
     		CanteenModel.setCanteen(inSettings.content);
 	    	this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
-	    	this.refresh();
+	    	this.resized();
     	}
     },
     addAboutPanel: function() {
@@ -182,17 +181,6 @@ enyo.kind({
     buttonBack: function() {
     	this.cleanContentPanel();
     	this.setIndex(0);
-	},
-	backButtonHandler: function(inSender, inEvent) {
-		if (AppModel.getIsAndroid()) {
-			if (this.getIndex() < 1) {
-				navigator.app.exitApp(); 
-			}
-			if (AppModel.getExistsSmallScreen()) {
-				this.cleanContentPanel();
-				this.setIndex(0);
-			}
-		}
 	},
 	resizeHandler: function(inSender, inEvent) {
 		AppModel.setExistsSmallScreen();

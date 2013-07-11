@@ -15,13 +15,15 @@ enyo.kind({
 			contentType: "text/xml",
 			onResponse: "gotMenu",
 			onError: "gotMenuFailure"},
-		{kind: "Scroller", fit: true, touch: true, horizontal: "hidden", classes: "scroller-sample-scroller enyo-fit", components: [
+		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
 			{name: "list", kind: "Repeater", count: 1, fit: true, touch: true, onSetupItem: "setupItem", 
 				components:	[
 					{name: "item", classes: "item", ontap: "itemTap", components: [
 						{kind: "FittableColumns", components: [
 							{kind: "FittableRows", centered: true, style: "text-align: center;", components: [
-								{name: "foodImage", kind: "Picture", pictureClasses: "food_image", spinnerClasses: "onyx-dark", currentSrc: "assets/0.png"}, 
+								{name:"image",  components: [
+									{name: "foodImage", kind: "Image", classes: "food_image", src: "assets/0.png", onerror: "imageError" }
+								]}, 
 								{name: "ratingImage", kind: "Image", style: "visibility: hidden;", src: "", onerror: "imageError"}
 							]},
 							{name: "description", classes: "description_box", components: [ 
@@ -40,14 +42,18 @@ enyo.kind({
 	setCount: function(counter) {
 		this.$.list.setCount(counter);
 	},
+	create: function() {
+		this.inherited(arguments);
+		FoodModel.initialize();
+	},
 	initialize: function(year, month, day) {
 		this.url=CanteenService.getUrl(year, month, day);
 		this.$.getMenu.setUrl(this.url);
 		this.$.getMenu.send();
 	},
 	gotMenu: function(inSender, inResponse) {
-		CanteenService.getCanteenMenu(inSender, inResponse);
-		this.doSelect({index: 0, first: 1});
+	  	CanteenService.getCanteenMenu(inSender, inResponse);
+	    this.doSelect({index: 0, first: 1});
 	    this.$.list.setCount(FoodModel.getSize());
 	    this.render();
 	},
@@ -68,7 +74,7 @@ enyo.kind({
 			if (foodEntry) {
 				if (foodEntry.isPictureAvailable) {
 					if (foodEntry.pictureKey != "") {
-						item.$.foodImage.replace("http://www.swcz.de/bilderspeiseplan/bilder_190/"+foodEntry.pictureKey+".png");
+						item.$.foodImage.setSrc("http://www.swcz.de/bilderspeiseplan/bilder_190/"+foodEntry.pictureKey+".png");
 					}
 				}
 				// rating

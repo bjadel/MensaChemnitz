@@ -14,13 +14,12 @@ enyo.kind({
 	spinnerClasses: "onyx-light",
 	components: [
 	    {name: "spinner", kind: "onyx.Spinner"},
-	    {name: "pic", kind: "ImageView", scale: "auto", thumb: true, disableZoom: this.disableZoom, src: this.src, onerror: "errorImageView", onload: "loadImageView"}
+	    {name: "pic", kind: "Image", src: this.src, onerror: "errorImageView", onload: "loadImageView"}
 	],
 	create: function() {
 		this.inherited(arguments);
 		this.$.spinner.addRemoveClass(this.spinnerClasses, true);
 		this.$.pic.addRemoveClass(this.pictureClasses, true);
-		this.$.pic.setDisableZoom(this.disableZoom);
 		this.$.pic.hide();
 	},
 	replace: function(url) {
