@@ -37,7 +37,7 @@ enyo.kind({
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Support"},
 					{ kind: "FittableColumns", components: [
 						{ name: "mailPicture", kind: "Image", src: "assets/mail.png"},									
-						{ name: "mailContent", tag: "p", content: "bjawebos@adelberg-online.de" }
+						{ name: "mailContent", tag: "p", allowHtml: true , content: "bjawebos@adelberg-online.de" }
 					]},
 					{ kind: "FittableColumns", components: [
 						{ name: "wwwPicture", kind: "Image", src: "assets/browser.png" },									

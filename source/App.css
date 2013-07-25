@@ -249,7 +249,7 @@ div.settings-panel {
 	background: url(../assets/bgwood.jpg);
 	z-index: 1;
 }
-div.settings-panel p {
+div.settings-panel a {
 	font-family: monospace;
 	text-align: left;
 	vertical-align: middle;
