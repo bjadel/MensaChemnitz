@@ -245,23 +245,23 @@ div#app_food_foodFee div#app_food_feeTitle {
 }
 
 /* About dialog */
-div#app_aboutPanel {
+div.settings-panel {
 	background: url(../assets/bgwood.jpg);
 	z-index: 1;
 }
-div#app_aboutPanel p {
+div.settings-panel p {
 	font-family: monospace;
 	text-align: left;
 	vertical-align: middle;
 }
 
-div#app_aboutPanel h1 {
+div.settings-panel h1 {
 	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	text-align: left;
 	vertical-align: middle;
 }
 
-#app_aboutPanel .popup_app_groupboxHeader {
+div.settings-panel .popup_app_groupboxHeader {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	text-align: left;
 	color: #DDD;
@@ -269,7 +269,7 @@ div#app_aboutPanel h1 {
 	border: none;
 }
 
-div#app_aboutPanel img {
+div.settings-panel img {
 	width: 30px;
 	height: 30px;
 	text-align: left;
@@ -277,7 +277,7 @@ div#app_aboutPanel img {
 	margin-right: 10px;
 }
 
-div#app_aboutPanel_aboutContent {
+div.settings-panel-content {
 	font: normal normal normal 16px/18px Courgette, Purisa, Helvetica, Arial, sans-serif;
 	position: relative; 
 	top: 20px;

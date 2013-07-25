@@ -7,6 +7,7 @@ enyo.kind({
 	classes: "app enyo-unselectable",
 	fit: true,
 	realtimeFit: true,
+	doNotReinitThePanel: false,
 	arrangerKind: "CollapsingArranger",
 	handlers: {
 		resize: "resizeHandler"
@@ -19,15 +20,9 @@ enyo.kind({
 				{name: "grabPicture", kind: "Image", src: "lib/onyx/images/grabbutton.png"}
 			]},
 			{kind: "FittableColumns", components: [
-				{kind: "onyx.MenuDecorator", fit: "true", onSelect: "settingsMenuItemSelected", components: [ 
-					{name: "menuCanteen", content: "", components: [{kind: "onyx.Icon", src: "assets/settings.png"}]},
-					{kind: "onyx.Tooltip", content: $L('Settings such as canteen selection')},
-					{kind: "onyx.Menu", floating: true, components: [ 
-						{name: "stranaCanteen", content: "Straße der Nationen"}, 
-						{name: "rhCanteen", content: "Reichenhainer"},
-						{classes: "onyx-menu-divider"},
-						{content: $L('About')}
-					]}
+				{kind: "onyx.TooltipDecorator", components: [
+					{kind: "onyx.Button", name:"buttonSettings", ontap:"addSettingsPanel", components: [ {kind: "onyx.Icon", src: "assets/settings.png"} ]},
+					{kind: "onyx.Tooltip", content: $L('Settings such as canteen selection')} 
 				]},
 				{kind: "onyx.TooltipDecorator", components: [
 					{kind: "onyx.Button", name:"buttonPreviousDate", ontap:"buttonPreviousDate", components: [ {kind: "onyx.Icon", src: "assets/go-previous.png"} ]},
@@ -57,7 +52,7 @@ enyo.kind({
 			]},
 			{kind: "Panels", name: "contentPanels", draggable: false, arrangerKind: "CardSlideInArranger", fit:true, realtimeFit: true, classes: "panels-sample-panels enyo-border-box", components: [
 				{kind: "Food", name: "food", fit: true},
-				{kind: "About", name: "aboutPanel", fit: true}
+				{kind: "Settings", name: "settingsPanel", onSelect: "updateCanteen", fit: true}
 			]}
 		]}
 	],
@@ -97,9 +92,7 @@ enyo.kind({
 			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
 			this.$.buttonNextFood.setStyle("visibility:hidden;");
 		}
-		// set canteen menu entries
-		this.$.stranaCanteen.setContent(StraNaCanteen.name);
-		this.$.rhCanteen.setContent(ReichenhainerCanteen.name);
+		// set canteen name
 		this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
     },
 	refresh: function() {
@@ -107,34 +100,31 @@ enyo.kind({
 		enyo.asyncMethod(this, "asyncInitialize");
     },
     foodSelected: function(inSender, inFood) {
-    	this.cleanContentPanel();
+    	if (this.doNotReinitThePanel == false) {
+    		this.cleanContentPanel();
+    	}
     	this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
     	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
     	this.$.food.setFood(foodEntry);
     	if (AppModel.getExistsSmallScreen()) {
     		// do not set the index to 1 after web service call (see FoodList)
     		if (!inFood.first == 1) {
-	    		this.setIndex(1);
+    			if (this.doNotReinitThePanel == false) {
+	    			this.setIndex(1);
+	    		}
     		}
     	}
-    },
-    settingsMenuItemSelected: function(inSender, inSettings) {
-    	if ($L('About') == inSettings.content) {
-    		// 'About' clicked
-			this.addAboutPanel();    		
-    	} else {
-    		// canteen chosen
-    		CanteenModel.setCanteen(inSettings.content);
-	    	this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
-	    	this.resized();
+    	if (this.doNotReinitThePanel == true) {
+   			this.doNotReinitThePanel = false;
     	}
     },
-    addAboutPanel: function() {
+    addSettingsPanel: function() {
+    	// set current canteen
+		this.$.settingsPanel.setSelectedCanteenKey(CanteenModel.getCanteen().key);
     	// hide food selection buttons
     	this.$.buttonPreviousFood.setStyle("visibility:hidden;");
 		this.$.buttonNextFood.setStyle("visibility:hidden;");
-		// set about panel
-		this.$.contentPanels.setIndex(2);
+    	this.$.contentPanels.setIndex(2);
 		if (AppModel.getExistsSmallScreen()) {
     		this.setIndex(1);
     	}
@@ -154,6 +144,16 @@ enyo.kind({
     },
     formatDate: function(date) {
 		return DateModel.formatDate(date);
+    },
+    updateCanteen: function(inSender) {
+		// set canteen name
+		var canteenKey = inSender.selectedCanteenKey;
+		CanteenModel.setCanteenKey(canteenKey);
+		// set flag "do not reinitialize the panel"
+		// the current settings panel should be activated/visible
+		this.doNotReinitThePanel = true;
+		// get data from service for new canteen
+		enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());    
     },
     buttonPreviousDate: function() {
     	this.cleanContentPanel();

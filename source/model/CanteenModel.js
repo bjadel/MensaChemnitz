@@ -23,6 +23,14 @@ var CanteenModel = ({
 		}
 		this.setStorageCanteen(this.canteen);
 	},
+	setCanteenKey: function(canteenKey) {
+		if(canteenKey == StraNaCanteen.key) {
+			this.canteen = StraNaCanteen;
+		} else {
+			this.canteen = ReichenhainerCanteen;
+		}
+		this.setStorageCanteen(this.canteen);
+	},
 	getCanteenName: function() {
 		return this.canteen.name;
 	},

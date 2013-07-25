@@ -2,13 +2,31 @@
  * This kind views the about panel.
  */
 enyo.kind({
-	name: "About",
+	name: "Settings",
 	kind: "Panels",
 	realtimeFit: true,
-	classes: "enyo-border-box",
+	classes: "enyo-border-box settings-panel",
+	events: {
+		onSelect: ""
+	},
+	selectedCanteenKey: "rh",
 	components: [
 		{kind: "Scroller", horizontal:"hidden", fit: true, touch: true, classes: "scroller-sample-scroller enyo-fit", components: [
-			{kind: "FittableRows", name: "aboutContent", centered: true, components: [
+			{kind: "FittableRows", classes: "settings-panel-content", centered: true, components: [
+				{name: "settingsTitle", content: $L('Settings'), tag: "h1"},
+				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
+					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: $L('Canteen')},
+					{ kind: "Group", classes: "onyx-sample-tools group", onActivate:"mensaActivated", highlander: true, components: [
+						{kind: "onyx.InputDecorator", components: [
+							{ kind:"onyx.Checkbox", name: "rh"},
+							{ content: "Reichenhainer Straße"}
+						]},
+						{kind: "onyx.InputDecorator", components: [
+							{ kind:"onyx.Checkbox", name: "strana"},
+							{ content: "Straße der Nationen"}
+						]} 
+					]}					
+				]},
 				{name: "aboutTitle", content: $L('About'), tag: "h1"},
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Info"},
@@ -56,5 +74,24 @@ enyo.kind({
 	},
 	rendered: function() {
 		this.inherited(arguments);
-	} 
+	},
+	mensaActivated: function(inSender, inEvent) {
+		if (inEvent.originator.getActive()) {
+			if (this.selectedCanteenKey != inEvent.originator.name) {
+				this.selectedCanteenKey = inEvent.originator.name;
+				this.doSelect();
+			}
+		}
+	},
+	setSelectedCanteenKey: function(canteenKey) {
+		this.selectedCanteenKey = canteenKey;
+		// set settings content
+		if (this.selectedCanteenKey == ReichenhainerCanteen.key) {
+			this.$.rh.setChecked(true);
+		} else if (this.selectedCanteenKey == StraNaCanteen.key) {
+			this.$.strana.setChecked(true);
+		} else {
+			this.selectedCanteenKey = ReichenhainerCanteen.key;
+		} 
+	}
 });
