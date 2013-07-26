@@ -20,7 +20,7 @@ enyo.kind({
 				{name: "grabPicture", kind: "Image", src: "lib/onyx/images/grabbutton.png"}
 			]},
 			{kind: "FittableColumns", components: [
-				{kind: "onyx.TooltipDecorator", components: [
+				{kind: "onyx.TooltipDecorator", fit: true, components: [
 					{kind: "onyx.Button", name:"buttonSettings", ontap:"addSettingsPanel", components: [ {kind: "onyx.Icon", src: "assets/settings.png"} ]},
 					{kind: "onyx.Tooltip", content: $L('Settings such as canteen selection')} 
 				]},

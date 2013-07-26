@@ -85,16 +85,6 @@
 	background: rgba(0,0,0,0.4);
 }
 
-.onyx-menu, .onyx.onyx-menu {
-	position: absolute;
-	min-width: 160px;
-	top: 100%;
-	left: 0;
-	margin-top: 2px;
-	padding: 3px 0;
-	border-radius: 3px;
-}
-
 /* food list */
 
 #app_foodlist {
@@ -244,7 +234,7 @@ div#app_food_foodFee div#app_food_feeTitle {
 	font: normal normal normal 24px/24px Courgette, Purisa, Helvetica, Arial, sans-serif;
 }
 
-/* About dialog */
+/* settings dialog */
 div.settings-panel {
 	background: url(../assets/bgwood.jpg);
 	z-index: 1;
@@ -269,9 +259,9 @@ div.settings-panel .popup_app_groupboxHeader {
 	border: none;
 }
 
-div.settings-panel img {
-	width: 30px;
-	height: 30px;
+.settings_image {
+	width: 30px !important;
+	height: 30px !important;
 	text-align: left;
 	vertical-align: middle;
 	margin-right: 10px;

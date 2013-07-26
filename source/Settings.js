@@ -36,19 +36,19 @@ enyo.kind({
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Support"},
 					{ kind: "FittableColumns", components: [
-						{ name: "mailPicture", kind: "Image", src: "assets/mail.png"},									
+						{ name: "mailPicture", kind: "Image", classes: "settings_image", src: "assets/mail.png"},									
 						{ name: "mailContent", tag: "p", allowHtml: true , content: "bjawebos@adelberg-online.de" }
 					]},
 					{ kind: "FittableColumns", components: [
-						{ name: "wwwPicture", kind: "Image", src: "assets/browser.png" },									
+						{ name: "wwwPicture", kind: "Image", classes: "settings_image", src: "assets/browser.png" },									
 						{ name: "homepageContent", tag: "p", allowHtml: true }
 					]},
 					{ kind: "FittableColumns", components: [
-						{ name: "twtPicture", kind: "Image", src: "assets/twitter.png" },									
+						{ name: "twtPicture", kind: "Image", classes: "settings_image", src: "assets/twitter.png" },									
 						{ name: "twitterContent", tag: "p", allowHtml: true}
 					]},
 					{ kind: "FittableColumns", components: [
-						{ name: "fbPicture", kind: "Image", src: "assets/f_logo.png" },									
+						{ name: "fbPicture", kind: "Image", classes: "settings_image", src: "assets/f_logo.png" },									
 						{ name: "fbContent", tag: "p", allowHtml: true}
 					]}
 				]}

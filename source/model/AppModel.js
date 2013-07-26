@@ -5,18 +5,19 @@ var AppModel = ({
 	initialize: function()  {
 		this.version = "0.4.0";
     	this.author = "Björn Adelberg";
-    	this.supportMail = '<a href="mailto:bjawebos@adelberg-online.de">EMail</a>';
     	
     	this.isAndroid = false;
     	this.isWeb = true;
     	this.isWebOS = false;
     	
     	if (this.isAndroid) {
+    		this.supportMail = "bjawebos@adelberg-online.de";
     		this.supportHomepage = "http://dev.adelberg-online.de";
     		this.supportTwitter = "https://twitter.com/bjawebos";
     		this.supportTwitterShort = "@bjawebos";
     		this.supportFacebook = "http://goo.gl/FPv0d";
     	} else {
+    		this.supportMail = '<a href="mailto:bjawebos@adelberg-online.de">EMail</a>';
     		this.supportHomepage = '<a href="http://dev.adelberg-online.de" target="_blank">Homepage</a>';
 	    	this.supportTwitter = '<a href="https://twitter.com/bjawebos" target="_blank">https://twitter.com/bjawebos</a>';
     		this.supportTwitterShort = '<a href="https://twitter.com/bjawebos" target="_blank">@bjawebos</a>';
