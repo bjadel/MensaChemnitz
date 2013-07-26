@@ -7,7 +7,7 @@ enyo.kind({
 	realtimeFit: true,
 	classes: "enyo-border-box",
 	components: [
-		{kind: "Scroller", fit: true, touch: true, classes: "scroller-sample-scroller enyo-fit", components: [
+		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
 			{kind: "FittableRows", name: "foodContent", centered: true, components: [
 				{name: "foodname", components: [
 					{name: "fooddate"},

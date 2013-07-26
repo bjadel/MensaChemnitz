@@ -11,7 +11,7 @@ enyo.kind({
 	},
 	selectedCanteenKey: "rh",
 	components: [
-		{kind: "Scroller", horizontal:"hidden", fit: true, touch: true, classes: "scroller-sample-scroller enyo-fit", components: [
+		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
 			{kind: "FittableRows", classes: "settings-panel-content", centered: true, components: [
 				{name: "settingsTitle", content: $L('Settings'), tag: "h1"},
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
