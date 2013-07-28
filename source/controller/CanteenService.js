@@ -101,5 +101,8 @@ var CanteenService = ({
 		if (FoodModel.getSize() <= 0) {
 	    	FoodModel.addFood("Upps", $L('No canteen menu entry available for this day.'), "0", "", "", "", "1", "0", "", "", "", "");
 	    }
+	},
+	getPictureURL: function() {
+		return "http://www.swcz.de/bilderspeiseplan/bilder_190/";
 	}
 });

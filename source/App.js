@@ -8,12 +8,13 @@ enyo.kind({
 	fit: true,
 	realtimeFit: true,
 	doNotReinitThePanel: false,
+	isSettingsVisible: false,
 	arrangerKind: "CollapsingArranger",
 	handlers: {
 		resize: "resizeHandler"
 	},
 	components: [
-		{kind: "enyo.Signals", onkeydown: "docKeypress" },
+		{kind: "enyo.Signals", onkeydown: "docKeypress", onbackbutton: "buttonBack" },
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
 				{name: "title", content: "Chemnitz", style: "width: 90%;"},
@@ -45,6 +46,7 @@ enyo.kind({
 				{kind: "Scroller", thumb: false, fit: true, touch: true, vertical: "hidden", style: "margin: 0;", components: [
 					{classes: "onyx-toolbar-inline", style: "white-space: nowrap;", components: [
 						{kind: "onyx.Button", name:"buttonBack", classes: "onyx-affirmative", ontap:"buttonBack", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-back-gray.png"} ]},
+						{kind: "onyx.Button", name:"buttonShare", ontap:"buttonShare", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/share.png"} ]},
 						{kind: "onyx.Button", name:"buttonNextFood", ontap:"buttonNextFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-next-gray.png"} ]},
 						{kind: "onyx.Button", name:"buttonPreviousFood", ontap:"buttonPreviousFood", components: [ {kind: "onyx.Icon", style: "width: 24px; height: 24px;", src: "assets/go-previous-gray.png"} ]}
 					]}
@@ -88,9 +90,12 @@ enyo.kind({
 		});
 		// set visibility of food rotation buttons
 		if (!AppModel.getExistsSmallScreen()) {
-			this.$.buttonBack.setStyle("visibility:hidden;");
-			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
-			this.$.buttonNextFood.setStyle("visibility:hidden;");
+			this.$.buttonBack.hide();
+			this.$.buttonPreviousFood.hide();
+			this.$.buttonNextFood.hide();
+			if (!AppModel.getIsAndroid()) {
+				this.$.buttonShare.hide();
+			}
 		}
 		// set canteen name
 		this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
@@ -102,6 +107,7 @@ enyo.kind({
     foodSelected: function(inSender, inFood) {
     	if (this.doNotReinitThePanel == false) {
     		this.cleanContentPanel();
+    		this.isSettingsVisible = false;
     	}
     	this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
     	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
@@ -119,23 +125,27 @@ enyo.kind({
     	}
     },
     addSettingsPanel: function() {
+    	// hide food selection buttons
+    	this.$.buttonPreviousFood.hide();
+		this.$.buttonNextFood.hide();
     	// set current canteen
 		this.$.settingsPanel.setSelectedCanteenKey(CanteenModel.getCanteen().key);
-    	// hide food selection buttons
-    	this.$.buttonPreviousFood.setStyle("visibility:hidden;");
-		this.$.buttonNextFood.setStyle("visibility:hidden;");
     	this.$.contentPanels.setIndex(2);
 		if (AppModel.getExistsSmallScreen()) {
     		this.setIndex(1);
     	}
+    	this.isSettingsVisible = true;
     },
     cleanContentPanel: function() {
     	if (AppModel.getExistsSmallScreen()) {
-			this.$.buttonPreviousFood.setStyle("visibility:visible;");
-			this.$.buttonNextFood.setStyle("visibility:visible;");
+			this.$.buttonPreviousFood.show();
+			this.$.buttonNextFood.show();
 		} else {
-			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
-			this.$.buttonNextFood.setStyle("visibility:hidden;");
+			this.$.buttonPreviousFood.hide();
+			this.$.buttonNextFood.hide();
+		}
+		if (!AppModel.getIsAndroid()) {
+			this.$.buttonShare.hide();
 		}
     	this.$.contentPanels.setIndex(0);
     	if (!AppModel.getExistsSmallScreen()) {
@@ -179,19 +189,41 @@ enyo.kind({
     	this.$.food.setFood(foodEntry);
     },
     buttonBack: function() {
-    	this.cleanContentPanel();
-    	this.setIndex(0);
+    	if (AppModel.getExistsSmallScreen()) {
+    		this.cleanContentPanel();
+			this.setIndex(0);
+		}
+	},
+	buttonShare: function() {
+		var lastClickedFood = FoodModel.getLastClickedFood();
+		if (lastClickedFood != null && !this.isSettingsVisible) {
+			var foodCategory = lastClickedFood.category;
+			var foodPictureKey = lastClickedFood.pictureKey;
+			if (foodPictureKey == "0") {
+				var pictureURL = ""; 
+			} else {
+				var pictureURL = CanteenService.getPictureURL()+foodPictureKey+".png ";
+			}
+			var text = " " + $L('tastes very well today!')+" "+pictureURL+"#chemapp";
+			this.share(foodCategory, text);
+		} else {
+			var text = $L('I like this app!')+" http://goo.gl/FPv0d #chemapp";
+			this.share("", text);
+		}
+	},
+	share: function(subject, text) {
+		ShareService.share(subject, text);
 	},
 	resizeHandler: function(inSender, inEvent) {
 		AppModel.setExistsSmallScreen();
 		if (!AppModel.getExistsSmallScreen()) {
-			this.$.buttonBack.setStyle("visibility:hidden;");
-			this.$.buttonPreviousFood.setStyle("visibility:hidden;");
-			this.$.buttonNextFood.setStyle("visibility:hidden;");
+			this.$.buttonBack.hide();
+			this.$.buttonPreviousFood.hide();
+			this.$.buttonNextFood.hide();
 		} else {
-			this.$.buttonBack.setStyle("visibility:visible;");
-			this.$.buttonPreviousFood.setStyle("visibility:visible;");
-			this.$.buttonNextFood.setStyle("visibility:visible;");
+			this.$.buttonBack.show();
+			this.$.buttonPreviousFood.show();
+			this.$.buttonNextFood.show();
 		}
 		this.cleanContentPanel();
 		this.rendered();

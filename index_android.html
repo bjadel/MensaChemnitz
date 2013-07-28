@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mensa Chemnitz</title>
+		<link rel="shortcut icon" href="assets/favicon.ico">
+		<!-- meta -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<!-- css -->
+		<link href="build/enyo.css" rel="stylesheet">
+		<link href="build/app.css" rel="stylesheet">
+		<!-- js -->
+		<script src="js/cordova.js"></script>
+		<script src="js/share.js"></script>
+		<script src="build/enyo.js"></script>
+		<script src="build/app.js" onerror="alert('No application build found, redirecting to debug.html.'), location='debug.html';"></script>
+		<script>
+			function onBodyLoad() {
+				document.addEventListener("deviceready", onDeviceReady, false);
+			}
+			
+			// PhoneGap is loaded and it is now safe to make calls PhoneGap methods
+			function onDeviceReady() {
+				// tell enyo to listen for backbutton event
+				enyo.dispatcher.listen(document, "backbutton");
+				new App().renderInto(document.body);
+			}
+		</script>
+	</head>
+	<body onLoad="onBodyLoad();" class="enyo-unselectable splashscreen">
+	</body>
+</html>

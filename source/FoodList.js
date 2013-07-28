@@ -22,7 +22,7 @@ enyo.kind({
 						{kind: "FittableColumns", components: [
 							{kind: "FittableRows", centered: true, style: "text-align: center;", components: [
 								{name:"image",  components: [
-									{name: "foodImage", kind: "Image", classes: "food_image", src: "assets/0.png", onerror: "imageError" }
+									{name: "foodImage", kind: "Picture", classes: "food_image", spinnerClasses: "onyx-dark" }
 								]}, 
 								{name: "ratingImage", kind: "Image", style: "visibility: hidden;", src: "", onerror: "imageError"}
 							]},
@@ -74,7 +74,7 @@ enyo.kind({
 			if (foodEntry) {
 				if (foodEntry.isPictureAvailable) {
 					if (foodEntry.pictureKey != "") {
-						item.$.foodImage.setSrc("http://www.swcz.de/bilderspeiseplan/bilder_190/"+foodEntry.pictureKey+".png");
+						item.$.foodImage.replace(CanteenService.getPictureURL()+foodEntry.pictureKey+".png");
 					}
 				}
 				// rating
@@ -121,8 +121,5 @@ enyo.kind({
 		var month = inDate.getMonth() + 1;
 		var day = inDate.getDate();
 		this.initialize(year, month, day);
-	},
-	imageError: function(inSender, inEvent) {
-		inEvent.currentTarget.src = "assets/0.png";
 	}
 });

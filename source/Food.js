@@ -49,7 +49,7 @@ enyo.kind({
 		// picture
 		if (inFood.isPictureAvailable) {
 			if (inFood.pictureKey != "") {
-				this.$.foodPicture.replace("http://www.swcz.de/bilderspeiseplan/bilder_190/"+inFood.pictureKey+".png");
+				this.$.foodPicture.replace(CanteenService.getPictureURL()+inFood.pictureKey+".png");
 			}
 		}
 		// ingredients

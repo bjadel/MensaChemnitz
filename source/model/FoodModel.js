@@ -3,7 +3,6 @@
  */
 var FoodModel = ({
 	initialize: function()  {
-		this.lastClicked = 0;
     	this.foodList = [];
     	this.rotateCounter = 0;
 	},
@@ -24,7 +23,7 @@ var FoodModel = ({
 		});
 	},
 	getLastClickedFood: function() {
-		return this.foodList[this.lastClicked];
+		return this.foodList[this.rotateCounter];
 	},
 	getFoodByIndex: function(index, isRotate) {
 		if (isRotate) {

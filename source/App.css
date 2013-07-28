@@ -91,7 +91,7 @@
 	background: url(../assets/bg.png);
 }
 
-#app_foodlist_list .food_image {
+#app_foodlist_list .food_image img {
 	width: 70px; 
 	height: 70px;
 }
