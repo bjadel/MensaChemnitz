@@ -37,19 +37,19 @@ enyo.kind({
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Support"},
 					{ kind: "FittableColumns", components: [
 						{ name: "mailPicture", kind: "Image", classes: "settings_image", src: "assets/mail.png"},									
-						{ name: "mailContent", tag: "p", allowHtml: true , content: "bjawebos@adelberg-online.de" }
+						{ name: "mailContent", tag: "a", allowHtml: true }
 					]},
 					{ kind: "FittableColumns", components: [
 						{ name: "wwwPicture", kind: "Image", classes: "settings_image", src: "assets/browser.png" },									
-						{ name: "homepageContent", tag: "p", allowHtml: true }
+						{ name: "homepageContent", tag: "a", ontap: "loadURL", allowHtml: true }
 					]},
 					{ kind: "FittableColumns", components: [
 						{ name: "twtPicture", kind: "Image", classes: "settings_image", src: "assets/twitter.png" },									
-						{ name: "twitterContent", tag: "p", allowHtml: true}
+						{ name: "twitterContent", tag: "a", ontap: "loadURL", allowHtml: true }
 					]},
 					{ kind: "FittableColumns", components: [
 						{ name: "fbPicture", kind: "Image", classes: "settings_image", src: "assets/f_logo.png" },									
-						{ name: "fbContent", tag: "p", allowHtml: true}
+						{ name: "fbContent", tag: "a", ontap: "loadURL", allowHtml: true }
 					]}
 				]}
 			]}
@@ -61,16 +61,21 @@ enyo.kind({
 		AppModel.setExistsSmallScreen();
 		// set about content
 		this.$.aboutTitle.setContent($L('About'));
-		this.$.mailContent.setContent(AppModel.supportMail);
-		this.$.homepageContent.setContent(AppModel.supportHomepage);
-		if (AppModel.getExistsSmallScreen()) {
-			this.$.twitterContent.setContent(AppModel.supportTwitterShort);
-		} else {
-			this.$.twitterContent.setContent(AppModel.supportTwitter);
-		}
+		// set author and version
 		this.$.authorContent.setContent($L('Author:') + " " + AppModel.author);
 		this.$.versionContent.setContent("Version: " + AppModel.version);
-		this.$.fbContent.setContent(AppModel.supportFacebook);
+		// set email content
+		this.$.mailContent.setAttribute("href", AppModel.supportMail);
+		this.$.mailContent.setContent($L('E-Mail'));
+		// set homepage
+		this.$.homepageContent.setAttribute("href", "#");
+		this.$.homepageContent.setContent($L('Homepage'));
+		// set Twitter
+		this.$.twitterContent.setAttribute("href", "#");
+		this.$.twitterContent.setContent($L('Twitter'));
+		// set facebook
+		this.$.fbContent.setAttribute("href", "#");
+		this.$.fbContent.setContent($L('Facebook'));
 	},
 	rendered: function() {
 		this.inherited(arguments);
@@ -93,5 +98,15 @@ enyo.kind({
 		} else {
 			this.selectedCanteenKey = ReichenhainerCanteen.key;
 		} 
+	}, 
+	loadURL: function(inSender, inEvent) {
+	    // load URL
+		if (inSender.getName() == "fbContent") {
+			URLLoader.loadURL(AppModel.supportFacebook);
+		} else if (inSender.getName() == "twitterContent") {
+			URLLoader.loadURL(AppModel.supportTwitter);
+		} else if (inSender.getName() == "homepageContent") {
+			URLLoader.loadURL(AppModel.supportHomepage);
+		}
 	}
 });

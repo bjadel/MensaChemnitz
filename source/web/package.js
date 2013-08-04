@@ -10,6 +10,7 @@ enyo.depends(
 	"../Settings.js",
 	"../controller/CanteenService.js",
 	"../controller/ShareService.js",
+	"../controller/URLLoader.js",
 	"../model/FoodModel.js",
 	"../model/CanteenModel.js",
 	"../model/DateModel.js",

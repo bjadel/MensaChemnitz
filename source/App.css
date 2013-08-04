@@ -134,7 +134,20 @@ div#app_food {
 #app_food_foodPictureWrapper #app_food_foodPicture #app_food_foodPicture_pic {
 	z-index: 4;
 	width: 190px; /* Breite des Elements */
-   	height: 190px; /* Höhe des Elements */
+	height: 190px; /* Höhe des Elements */
+	-webkit-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	-o-transition: all .3s ease-out;
+	transition: all .3s ease-out;
+}
+
+#app_food_foodPictureWrapper #app_food_foodPicture #app_food_foodPicture_pic:hover {
+	-moz-transform: scale(2);
+	-webkit-transform: scale(2);
+	-o-transform: scale(2);
+	transform: scale(2);
+	-ms-transform: scale(2);
+	filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=2, M12=-0, M21=0, M22=2);
 }
 
 #app_food_foodPictureWrapper #app_food_foodPicture .onyx-spinner {
@@ -190,7 +203,7 @@ div#app_food_foodname {
     -webkit-border-image: url(../assets/borderimage.png) 14 16 stretch;
     -o-border-image: url(../assets/borderimage.png) 14 16 stretch;
     border-image: url(../assets/borderimage.png) 14 16 stretch;
-    z-index: 7;
+    z-index: 1;
 }
 div#app_food_foodname div#app_food_fooddate {
 	font-family: monospace;
@@ -227,7 +240,7 @@ div#app_food_foodFee {
     -webkit-border-image: url(../assets/borderimage.png) 14 16 stretch;
     -o-border-image: url(../assets/borderimage.png) 14 16 stretch;
     border-image: url(../assets/borderimage.png) 14 16 stretch;
-    z-index: 6;
+    z-index: 1;
 }
 
 div#app_food_foodFee div#app_food_feeTitle {

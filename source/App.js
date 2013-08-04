@@ -14,7 +14,7 @@ enyo.kind({
 		resize: "resizeHandler"
 	},
 	components: [
-		{kind: "enyo.Signals", onkeydown: "docKeypress", onbackbutton: "buttonBack" },
+		{kind: "enyo.Signals", onkeydown: "docKeypress", onbackbutton: "backButtonHandler" },
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
 				{name: "title", content: "Chemnitz", style: "width: 90%;"},
@@ -194,6 +194,14 @@ enyo.kind({
 			this.setIndex(0);
 		}
 	},
+	backButtonHandler: function(inSender, inEvent) {
+		if (AppModel.getIsAndroid()) {
+			if (this.getIndex() < 1) {
+				navigator.app.exitApp();
+			}
+			this.buttonBack();
+		}
+	}, 
 	buttonShare: function() {
 		var lastClickedFood = FoodModel.getLastClickedFood();
 		if (lastClickedFood != null && !this.isSettingsVisible) {
