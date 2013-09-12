@@ -103,6 +103,9 @@ var CanteenService = ({
 	    }
 	},
 	getPictureURL: function() {
+		return "http://www.swcz.de/bilderspeiseplan/bilder_350/";
+	},
+	getSmallPictureURL: function() {
 		return "http://www.swcz.de/bilderspeiseplan/bilder_190/";
 	}
 });

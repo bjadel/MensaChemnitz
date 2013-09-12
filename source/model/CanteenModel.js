@@ -5,6 +5,7 @@ var CanteenModel = ({
 	initialize: function()  {
 		ReichenhainerCanteen.initialize();
 		StraNaCanteen.initialize();
+		ScheffelbergCanteen.initialize();
 		this.canteen = ReichenhainerCanteen;
 		this.storageKey = "canteen";
 		var storageCanteen = this.getStorageCanteen();
@@ -18,16 +19,20 @@ var CanteenModel = ({
 	setCanteen: function(canteenName) {
 		if(canteenName == StraNaCanteen.name) {
 			this.canteen = StraNaCanteen;
-		} else {
+		} else if(canteenName == ReichenhainerCanteen.name) {
 			this.canteen = ReichenhainerCanteen;
+		} else if(canteenName == ScheffelbergCanteen.name) {
+			this.canteen = ScheffelbergCanteen;
 		}
 		this.setStorageCanteen(this.canteen);
 	},
 	setCanteenKey: function(canteenKey) {
 		if(canteenKey == StraNaCanteen.key) {
 			this.canteen = StraNaCanteen;
-		} else {
+		} else if(canteenKey == ReichenhainerCanteen.key) {
 			this.canteen = ReichenhainerCanteen;
+		} else if(canteenKey == ScheffelbergCanteen.key) {
+			this.canteen = ScheffelbergCanteen;
 		}
 		this.setStorageCanteen(this.canteen);
 	},

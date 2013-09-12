@@ -24,7 +24,11 @@ enyo.kind({
 						{kind: "onyx.InputDecorator", components: [
 							{ kind:"onyx.Checkbox", name: "strana"},
 							{ content: "Straße der Nationen"}
-						]} 
+						]},
+						{kind: "onyx.InputDecorator", components: [
+						    { kind:"onyx.Checkbox", name: "schbg"},
+						    { content: "Mensa am Scheffelberg"}
+						]}
 					]}					
 				]},
 				{name: "aboutTitle", content: $L('About'), tag: "h1"},
@@ -95,6 +99,8 @@ enyo.kind({
 			this.$.rh.setChecked(true);
 		} else if (this.selectedCanteenKey == StraNaCanteen.key) {
 			this.$.strana.setChecked(true);
+		} else if (this.selectedCanteenKey == ScheffelbergCanteen.key) {
+			this.$.schbg.setChecked(true);
 		} else {
 			this.selectedCanteenKey = ReichenhainerCanteen.key;
 		} 

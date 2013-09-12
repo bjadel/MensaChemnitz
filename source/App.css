@@ -24,8 +24,22 @@
   src: local('Courgette'), local('Courgette'), url('../assets/fonts/Courgette.ttf') format('truetype');
 }
 
+.background {
+	background-color: #000;
+}
+
 .splashscreen {
-	background: #000 url(../assets/crossplatform/icon_200.png) top center no-repeat;
+	top: 38%;
+	margin-top: 90px;
+	min-height: 200px; 
+	min-width: 200px; 
+	background: #000 url(../assets/crossplatform/icon_200_rot.png) center no-repeat;
+	-webkit-animation: rotation 4s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg);}
+    to   {-webkit-transform: rotate(359deg);}
 }
 
 #app {

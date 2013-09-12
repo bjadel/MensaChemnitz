@@ -74,7 +74,7 @@ enyo.kind({
 			if (foodEntry) {
 				if (foodEntry.isPictureAvailable) {
 					if (foodEntry.pictureKey != "") {
-						item.$.foodImage.replace(CanteenService.getPictureURL()+foodEntry.pictureKey+".png");
+						item.$.foodImage.replace(CanteenService.getSmallPictureURL()+foodEntry.pictureKey+".png");
 					}
 				}
 				// rating
