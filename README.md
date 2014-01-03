@@ -3,7 +3,7 @@ Mensa Chemnitz
 
 About
 -----
-This application displays the canteen menu of the TU Chemnitz.
+This application displays the canteen menu of the TU Chemnitz and FH Zwickau.
 
 Contact
 -------
