@@ -12,7 +12,6 @@
 		<link href="build/app.css" rel="stylesheet">
 		<!-- js -->
 		<script src="cordova.js"></script>
-		<script src="plugins/org.apache.cordova.plugins.share/www/Share.js"></script>
 		<script src="build/enyo.js"></script>
 		<script src="build/app.js" onerror="alert('No application build found, redirecting to debug.html.'), location='debug.html';"></script>
 		<script>
@@ -22,8 +21,6 @@
 			
 			// PhoneGap is loaded and it is now safe to make calls PhoneGap methods
 			function onDeviceReady() {
-				// tell enyo to listen for backbutton event
-				enyo.dispatcher.listen(document, "backbutton");
 				document.body.className="enyo-unselectable";
 				new App().renderInto(document.body);
 			}

@@ -3,6 +3,9 @@
 all:
 	# make web version
 	node enyo/tools/deploy.js -p package.js -o deploy/web
+	# make bb10 version
+	node enyo/tools/deploy.js -p package.js -o deploy/bb10
+	cp index_bb10.html deploy/bb10/index.html
 	# make android version
 	cp package.js package_web.js
 	mv package_android.js package.js
@@ -13,5 +16,4 @@ all:
 	mv package_web.js package.js
 	mv index.html index_android.html
 	mv index_web.html index.html
-	cp -r js deploy/android/
 	cp error.html deploy/android/

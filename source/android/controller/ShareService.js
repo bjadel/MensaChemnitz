@@ -6,7 +6,7 @@ var ShareService = ({
 		// nothing to do
 	},
 	share: function(subject, text) {
-		share = cordova.require("cordova/plugin/share");
+		share = cordova.require("org.apache.cordova.plugins.share.Share");
 		share.show({subject: subject, text: text},
 			function() {
 				console.log("Cordova Plugin: Share: callback success");
