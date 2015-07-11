@@ -23,12 +23,37 @@ enyo.kind({
 				{name: "foodPictureWrapper", kind: "FittableRows", components: [
 					{name: "foodPicture", kind: "Picture" }
 				]},
-				{name: "foodFee", components: [
-					{name: "feeTitle", content: $L('Canteen Fees')},
-					{name: "feeStudent"},
-					{name: "feeEmployee"},
-					{name: "feeGuest"}
-				]}
+				{kind: "FittableColumns", name: "additionalContent", centered: true, components: [
+					{name: "foodFee", components: [
+						{name: "feeTitle", content: $L('Canteen Fees')},
+						{name: "feeStudent"},
+						{name: "feeEmployee"},
+						{name: "feeGuest"}
+					]},
+					{name: "additive", components: [
+						{name: "additiveTitle", content: $L('Food Additive')},
+						{content: $L('01 - with colouring agent')},
+						{content: $L('02 - with preservative')},
+						{content: $L('03 - with antioxidant')},
+						{content: $L('04 - with flavour enhancer')},
+						{content: $L('05 - sulfured')},
+						{content: $L('06 - blackened')},
+						{content: $L('07 - waxed')},
+						{content: $L('08 - with phosphate')},
+						{content: $L('09 - with sweetener')},
+						{content: $L('10 - contains a phenylalanine resource')},
+						{content: $L('11 - caffeinated')},
+						{content: $L('12 - containing quinine')},
+						{content: $L('13 - containing gluten')},
+						{content: $L('14 - crustaceans')},
+						{content: $L('15 - with milk powder')},
+						{content: $L('16 - with whey protein')},
+						{content: $L('17 - with whey powder')},
+						{content: $L('18 - with egg white')},
+						{content: $L('19 - using lactic')},
+						{content: $L('20 - using cream')}
+					]}
+				 ]}
 			]}
 		]}
 	],
@@ -50,6 +75,7 @@ enyo.kind({
 		if (inFood.isPictureAvailable) {
 			if (inFood.pictureKey != "") {
 				this.$.foodPicture.replace(CanteenService.getPictureURL()+inFood.pictureKey+".png");
+				this.$.foodPicture.setAlternativeText(inFood.description);
 			}
 		}
 		// ingredients

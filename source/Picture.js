@@ -14,7 +14,7 @@ enyo.kind({
 	spinnerClasses: "onyx-light",
 	components: [
 	    {name: "spinner", kind: "onyx.Spinner"},
-	    {name: "pic", kind: "Image", src: this.src, onerror: "errorImageView", onload: "loadImageView"}
+	    {name: "pic", kind: "Image", alt: "", src: this.src, onerror: "errorImageView", onload: "loadImageView"}
 	],
 	create: function() {
 		this.inherited(arguments);
@@ -33,6 +33,9 @@ enyo.kind({
 		this.$.pic.setSrc(this.currentSrc);
 		this.$.spinner.stop();
 		this.$.pic.show();
+	},
+	setAlternativeText: function(text) {
+		this.$.pic.setAlt(text);
 	},
 	errorImageView: function() {
 		this.replaceURL("assets/0.png");

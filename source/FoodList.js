@@ -10,28 +10,28 @@ enyo.kind({
 		onSelect: ""
 	},
 	components: [
-		{name: "getMenu", kind: "enyo.WebService", 
+		{name: "getMenu", kind: "enyo.WebService",
 			handleAs: "text",
 			contentType: "text/xml",
 			onResponse: "gotMenu",
 			onError: "gotMenuFailure"},
 		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
-			{name: "list", kind: "Repeater", count: 1, fit: true, touch: true, onSetupItem: "setupItem", 
+			{name: "list", kind: "Repeater", count: 1, fit: true, touch: true, onSetupItem: "setupItem",
 				components:	[
 					{name: "item", classes: "item", ontap: "itemTap", components: [
 						{kind: "FittableColumns", components: [
 							{kind: "FittableRows", centered: true, style: "text-align: center;", components: [
 								{name:"image",  components: [
 									{name: "foodImage", kind: "Picture", classes: "food_image", spinnerClasses: "onyx-dark" }
-								]}, 
+								]},
 								{name: "ratingImage", kind: "Image", style: "visibility: hidden;", src: "", onerror: "imageError"}
 							]},
-							{name: "description", classes: "description_box", components: [ 
+							{name: "description", classes: "description_box", components: [
 								{kind: "FittableRows", components: [
 									{name: "name", classes: "food_name"},
 									{name: "foodItemDescription", classes: "food_description"},
 									{name: "foodItemFeeList", classes: "food_fee"}
-								]} 
+								]}
 							]}
 						]}
 					]}
@@ -69,12 +69,13 @@ enyo.kind({
 		if (i < FoodModel.getSize()) {
 			var foodEntry = FoodModel.getFoodByIndex(i, false);
 			if (i == 0) {
-				item.children[0].addRemoveClass("onyx-selected", 1);
+				item.$.item.addRemoveClass("onyx-selected", 1);
 			}
 			if (foodEntry) {
 				if (foodEntry.isPictureAvailable) {
 					if (foodEntry.pictureKey != "") {
 						item.$.foodImage.replace(CanteenService.getSmallPictureURL()+foodEntry.pictureKey+".png");
+						item.$.foodImage.setAlternativeText(foodEntry.description);
 					}
 				}
 				// rating
@@ -109,11 +110,12 @@ enyo.kind({
 		return true;
 	},
 	itemTap: function(inSender, inEvent) {
-		var repeaterItems = inSender.parent.parent.children;
+		var repeaterItems = inSender.children;
+		var i = 0;
 		enyo.forEach(repeaterItems, function(item) {
-			item.children[0].addRemoveClass("onyx-selected", 0);
+			item.$.item.addRemoveClass("onyx-selected", inEvent.index == i);
+			i++;
 		});
-		inSender.addRemoveClass("onyx-selected", 1);
 		this.doSelect(inEvent);
 	},
 	setDate: function(inDate) {

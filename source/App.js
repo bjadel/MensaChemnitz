@@ -17,7 +17,7 @@ enyo.kind({
 		{kind: "enyo.Signals", onkeydown: "docKeypress", onbackbutton: "backButtonHandler" },
 		{kind: "FittableRows", classes: "left", components: [
 			{kind: "onyx.Toolbar", style: "overflow: initial;", components: [
-				{name: "title", content: "Chemnitz", style: "width: 90%;"},
+				{name: "title", content: "Chemnitz", style: "width: 90%;", ontap: "canteenSelected", allowHtml: true},
 				{name: "grabPicture", kind: "Image", src: "lib/onyx/images/grabbutton.png"}
 			]},
 			{kind: "FittableColumns", components: [
@@ -54,7 +54,8 @@ enyo.kind({
 			]},
 			{kind: "Panels", name: "contentPanels", draggable: false, arrangerKind: "CardSlideInArranger", fit:true, realtimeFit: true, classes: "panels-sample-panels enyo-border-box", components: [
 				{kind: "Food", name: "food", fit: true},
-				{kind: "Settings", name: "settingsPanel", onSelect: "updateCanteen", fit: true}
+				{kind: "Settings", name: "settingsPanel", onSelect: "updateCanteen", fit: true},
+				{kind: "Canteen", name: "canteenPanel", fit: true}
 			]}
 		]}
 	],
@@ -98,7 +99,7 @@ enyo.kind({
 			}
 		}
 		// set canteen name
-		this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
+		this.$.title.setContent("<span style=\"text-decoration:underline;\">" + CanteenModel.getCanteenName() + "</span> - " + this.formatDate(DateModel.getCurrentDate()));
     },
 	refresh: function() {
 		this.cleanContentPanel();
@@ -109,7 +110,7 @@ enyo.kind({
     		this.cleanContentPanel();
     		this.isSettingsVisible = false;
     	}
-    	this.$.title.setContent(CanteenModel.getCanteenName() + " - " + this.formatDate(DateModel.getCurrentDate()));
+    	this.$.title.setContent("<span style=\"text-decoration:underline;\">" + CanteenModel.getCanteenName() + "</span> - " + this.formatDate(DateModel.getCurrentDate()));
     	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
     	this.$.food.setFood(foodEntry);
     	if (AppModel.getExistsSmallScreen()) {
@@ -130,11 +131,23 @@ enyo.kind({
 		this.$.buttonNextFood.hide();
     	// set current canteen
 		this.$.settingsPanel.setSelectedCanteenKey(CanteenModel.getCanteen().key);
-    	this.$.contentPanels.setIndex(2);
+    	this.$.contentPanels.setIndex(1);
 		if (AppModel.getExistsSmallScreen()) {
     		this.setIndex(1);
     	}
     	this.isSettingsVisible = true;
+    },
+    canteenSelected: function() {
+    // hide food selection buttons
+    	this.$.buttonPreviousFood.hide();
+		this.$.buttonNextFood.hide();
+    	// set current canteen
+		this.$.canteenPanel.setSelectedCanteen(CanteenModel.getCanteen());
+    	this.$.contentPanels.setIndex(2);
+		if (AppModel.getExistsSmallScreen()) {
+    		this.setIndex(1);
+    	}
+    	this.isSettingsVisible = false;
     },
     cleanContentPanel: function() {
     	if (AppModel.getExistsSmallScreen()) {

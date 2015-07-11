@@ -3,7 +3,7 @@
  */
 var AppModel = ({
 	initialize: function()  {
-		this.version = "1.0.2";
+		this.version = "1.1.0";
     	this.author = "Björn Adelberg";
     	
     	this.isAndroid = false;

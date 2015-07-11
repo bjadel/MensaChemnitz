@@ -4,6 +4,7 @@ enyo.depends(
 	"$lib/g11n",
 	"../App.css",
 	"../App.js",
+	"../Canteen.js",
 	"../Food.js",
 	"../FoodList.js",
 	"../Picture.js",
@@ -15,6 +16,7 @@ enyo.depends(
 	"../model/CanteenModel.js",
 	"../model/DateModel.js",
 	"../model/ReichenhainerCanteen.js",
+	"../model/RingCanteen.js",
 	"../model/StraNaCanteen.js",
 	"../model/ScheffelbergCanteen.js",
 	"../model/AppModel.js"

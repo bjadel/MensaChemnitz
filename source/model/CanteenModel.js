@@ -6,6 +6,7 @@ var CanteenModel = ({
 		ReichenhainerCanteen.initialize();
 		StraNaCanteen.initialize();
 		ScheffelbergCanteen.initialize();
+		RingCanteen.initialize();
 		this.canteen = ReichenhainerCanteen;
 		this.storageKey = "canteen";
 		var storageCanteen = this.getStorageCanteen();
@@ -23,6 +24,8 @@ var CanteenModel = ({
 			this.canteen = ReichenhainerCanteen;
 		} else if(canteenName == ScheffelbergCanteen.name) {
 			this.canteen = ScheffelbergCanteen;
+		} else if(canteenName == RingCanteen.name) {
+			this.canteen = RingCanteen;
 		}
 		this.setStorageCanteen(this.canteen);
 	},
@@ -33,6 +36,8 @@ var CanteenModel = ({
 			this.canteen = ReichenhainerCanteen;
 		} else if(canteenKey == ScheffelbergCanteen.key) {
 			this.canteen = ScheffelbergCanteen;
+		} else if(canteenKey == RingCanteen.key) {
+			this.canteen = RingCanteen;
 		}
 		this.setStorageCanteen(this.canteen);
 	},
