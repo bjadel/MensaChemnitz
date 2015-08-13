@@ -23,11 +23,11 @@ enyo.kind({
 			{kind: "FittableColumns", components: [
 				{kind: "onyx.TooltipDecorator", fit: true, components: [
 					{kind: "onyx.Button", name:"buttonSettings", ontap:"addSettingsPanel", components: [ {kind: "onyx.Icon", src: "assets/settings.png"} ]},
-					{kind: "onyx.Tooltip", content: $L('Settings such as canteen selection')} 
+					{kind: "onyx.Tooltip", content: $L('Settings such as canteen selection')}
 				]},
 				{kind: "onyx.TooltipDecorator", components: [
 					{kind: "onyx.Button", name:"buttonPreviousDate", ontap:"buttonPreviousDate", components: [ {kind: "onyx.Icon", src: "assets/go-previous.png"} ]},
-					{kind: "onyx.Tooltip", content: $L('Previous')} 
+					{kind: "onyx.Tooltip", content: $L('Previous')}
 				]},
 				{kind: "onyx.TooltipDecorator", components: [
 					{kind: "onyx.Button", name:"buttonHomeDate", ontap:"buttonHomeDate", components: [ {kind: "onyx.Icon", src: "assets/go-home.png"} ]},
@@ -53,9 +53,9 @@ enyo.kind({
 				]}
 			]},
 			{kind: "Panels", name: "contentPanels", draggable: false, arrangerKind: "CardSlideInArranger", fit:true, realtimeFit: true, classes: "panels-sample-panels enyo-border-box", components: [
-				{kind: "Food", name: "food", fit: true},
-				{kind: "Settings", name: "settingsPanel", onSelect: "updateCanteen", fit: true},
-				{kind: "Canteen", name: "canteenPanel", fit: true}
+				{kind: "Food", name: "food", onBack: "buttonBack", fit: true},
+				{kind: "Settings", name: "settingsPanel", onSelect: "updateCanteen", onBack: "buttonBack", fit: true},
+				{kind: "Canteen", name: "canteenPanel", onBack: "buttonBack", fit: true}
 			]}
 		]}
 	],
@@ -176,7 +176,7 @@ enyo.kind({
 		// the current settings panel should be activated/visible
 		this.doNotReinitThePanel = true;
 		// get data from service for new canteen
-		enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());    
+		enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());
     },
     buttonPreviousDate: function() {
     	this.cleanContentPanel();
@@ -214,14 +214,14 @@ enyo.kind({
 			}
 			this.buttonBack();
 		}
-	}, 
+	},
 	buttonShare: function() {
 		var lastClickedFood = FoodModel.getLastClickedFood();
 		if (lastClickedFood != null && !this.isSettingsVisible) {
 			var foodCategory = lastClickedFood.category;
 			var foodPictureKey = lastClickedFood.pictureKey;
 			if (foodPictureKey == "0") {
-				var pictureURL = ""; 
+				var pictureURL = "";
 			} else {
 				var pictureURL = CanteenService.getPictureURL()+foodPictureKey+".png ";
 			}

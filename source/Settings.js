@@ -7,14 +7,15 @@ enyo.kind({
 	realtimeFit: true,
 	classes: "enyo-border-box settings-panel",
 	events: {
-		onSelect: ""
+		onSelect: "",
+		onBack: ""
 	},
 	selectedCanteenKey: "rh",
 	components: [
-		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
+		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", ondragover: "handleOnDragEvent", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
 			{kind: "FittableRows", classes: "settings-panel-content", centered: true, components: [
 				{name: "settingsTitle", content: $L('Settings'), tag: "h1"},
-				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
+				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: $L('Canteen')},
 					{ kind: "Group", classes: "onyx-sample-tools group", onActivate:"mensaActivated", highlander: true, components: [
 						{kind: "onyx.InputDecorator", components: [
@@ -33,30 +34,30 @@ enyo.kind({
 						    { kind:"onyx.Checkbox", name: "ring"},
 						    { content: "Mensa Ring"}
 						]}
-					]}					
+					]}
 				]},
 				{name: "aboutTitle", content: $L('About'), tag: "h1"},
-				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
+				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Info"},
 					{ name: "authorContent", tag: "p", content: "Author: Björn Adelberg" },
-					{ name: "versionContent", tag: "p" }					
+					{ name: "versionContent", tag: "p" }
 				]},
-				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [ 
+				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [
 					{ kind: "onyx.GroupboxHeader", classes: "popup_app_groupboxHeader", content: "Support"},
 					{ kind: "FittableColumns", components: [
-						{ name: "mailPicture", kind: "Image", classes: "settings_image", src: "assets/mail.png"},									
+						{ name: "mailPicture", kind: "Image", classes: "settings_image", src: "assets/mail.png"},
 						{ name: "mailContent", tag: "a", allowHtml: true }
 					]},
 					{ kind: "FittableColumns", components: [
-						{ name: "wwwPicture", kind: "Image", classes: "settings_image", src: "assets/browser.png" },									
+						{ name: "wwwPicture", kind: "Image", classes: "settings_image", src: "assets/browser.png" },
 						{ name: "homepageContent", tag: "a", ontap: "loadURL", allowHtml: true }
 					]},
 					{ kind: "FittableColumns", components: [
-						{ name: "twtPicture", kind: "Image", classes: "settings_image", src: "assets/twitter.png" },									
+						{ name: "twtPicture", kind: "Image", classes: "settings_image", src: "assets/twitter.png" },
 						{ name: "twitterContent", tag: "a", ontap: "loadURL", allowHtml: true }
 					]},
 					{ kind: "FittableColumns", components: [
-						{ name: "fbPicture", kind: "Image", classes: "settings_image", src: "assets/f_logo.png" },									
+						{ name: "fbPicture", kind: "Image", classes: "settings_image", src: "assets/f_logo.png" },
 						{ name: "fbContent", tag: "a", ontap: "loadURL", allowHtml: true }
 					]}
 				]}
@@ -109,8 +110,8 @@ enyo.kind({
 			this.$.ring.setChecked(true);
 		} else {
 			this.selectedCanteenKey = ReichenhainerCanteen.key;
-		} 
-	}, 
+		}
+	},
 	loadURL: function(inSender, inEvent) {
 	    // load URL
 		if (inSender.getName() == "fbContent") {
@@ -120,5 +121,15 @@ enyo.kind({
 		} else if (inSender.getName() == "homepageContent") {
 			URLLoader.loadURL(AppModel.supportHomepage);
 		}
+	},
+	handleOnDragEvent: function(sender, event) {
+		if (event.srcEvent.type == "touchmove") {
+			if (event.horizontal) {
+				if (AppModel.getExistsSmallScreen()) {
+					this.doBack();
+				}
+			}
+		}
+		return true;
 	}
 });

@@ -6,9 +6,12 @@ enyo.kind({
 	kind: "Panels",
 	realtimeFit: true,
 	classes: "enyo-border-box",
+	events: {
+		onBack:""
+	},
 	components: [
 		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
-			{kind: "FittableRows", name: "foodContent", centered: true, components: [
+			{kind: "FittableRows", name: "foodContent", ondragover: "handleOnDragEvent", centered: true, components: [
 				{name: "foodname", components: [
 					{name: "fooddate"},
 					{name: "foodtitle"},
@@ -51,7 +54,33 @@ enyo.kind({
 						{content: $L('17 - with whey powder')},
 						{content: $L('18 - with egg white')},
 						{content: $L('19 - using lactic')},
-						{content: $L('20 - using cream')}
+						{content: $L('20 - using cream')},
+						{content: $L('21 - celery')},
+						{content: $L('22 - mustard')},
+						{content: $L('23 - sesame')},
+						{content: $L('24 - sulphite/sulphuric')},
+						{content: $L('25 - lupine')},
+						{content: $L('26 - molluscs')},
+						{content: $L('35 - contains azo dye')},
+						{content: $L('36 - with whey protein')},
+						{content: $L('37 - with milk powder')},
+						{content: $L('38 - with milk protein')},
+						{content: $L('39 - with egg white')},
+						{content: $L('40 - applying milk')},
+						{content: $L('41 - applying cream')},
+						{content: $L('43 - with cocoa compound coating')},
+						{content: $L('44 - with alcohol')},
+						{content: $L('45 - with gelatine')},
+						{content: $L('46 - with carmine E120')},
+						{content: $L('47 - with animal rennet')},
+						{content: $L('48 - with honey')},
+						{content: $L('49 - with garlic')},
+						{content: $L('51 - pork')},
+						{content: $L('52 - beef')},
+						{content: $L('53 - lamb')},
+						{content: $L('54 - poultry')},
+						{content: $L('55 - bushmeat')},
+						{content: $L('56 - fish')}
 					]}
 				 ]}
 			]}
@@ -118,5 +147,15 @@ enyo.kind({
 			this.$.stage4.setSrc(picUrl)
 			this.$.stage4.show();
 		}
+	},
+	handleOnDragEvent: function(sender, event) {
+		if (event.srcEvent.type == "touchmove") {
+			if (event.horizontal) {
+				if (AppModel.getExistsSmallScreen()) {
+					this.doBack();
+				}
+			}
+		}
+		return true;
 	}
 });
