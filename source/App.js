@@ -53,7 +53,7 @@ enyo.kind({
 				]}
 			]},
 			{kind: "Panels", name: "contentPanels", draggable: false, arrangerKind: "CardSlideInArranger", fit:true, realtimeFit: true, classes: "panels-sample-panels enyo-border-box", components: [
-				{kind: "Food", name: "food", onBack: "buttonBack", fit: true},
+				{kind: "Food", name: "food", onBack: "backOnViewFood", fit: true},
 				{kind: "Settings", name: "settingsPanel", onSelect: "updateCanteen", onBack: "buttonBack", fit: true},
 				{kind: "Canteen", name: "canteenPanel", onBack: "buttonBack", fit: true}
 			]}
@@ -79,7 +79,7 @@ enyo.kind({
 	asyncCallDate: function(date) {
 	 	this.$.foodlist.setDate(date);
 	},
-    initialize: function() {
+  initialize: function() {
 		AppModel.setExistsSmallScreen();
 		// When ready...
 		window.addEventListener("load",function() {
@@ -104,108 +104,111 @@ enyo.kind({
 	refresh: function() {
 		this.cleanContentPanel();
 		enyo.asyncMethod(this, "asyncInitialize");
-    },
-    foodSelected: function(inSender, inFood) {
-    	if (this.doNotReinitThePanel == false) {
-    		this.cleanContentPanel();
-    		this.isSettingsVisible = false;
-    	}
-    	this.$.title.setContent("<span style=\"text-decoration:underline;\">" + CanteenModel.getCanteenName() + "</span> - " + this.formatDate(DateModel.getCurrentDate()));
-    	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
-    	this.$.food.setFood(foodEntry);
-    	if (AppModel.getExistsSmallScreen()) {
-    		// do not set the index to 1 after web service call (see FoodList)
-    		if (!inFood.first == 1) {
-    			if (this.doNotReinitThePanel == false) {
-	    			this.setIndex(1);
-	    		}
+  },
+  foodSelected: function(inSender, inFood) {
+  	if (this.doNotReinitThePanel == false) {
+  		this.cleanContentPanel();
+  		this.isSettingsVisible = false;
+  	}
+  	this.$.title.setContent("<span style=\"text-decoration:underline;\">" + CanteenModel.getCanteenName() + "</span> - " + this.formatDate(DateModel.getCurrentDate()));
+  	var foodEntry =  FoodModel.getFoodByIndex(inFood.index, true);
+  	this.$.food.setFood(foodEntry);
+  	if (AppModel.getExistsSmallScreen()) {
+  		// do not set the index to 1 after web service call (see FoodList)
+  		if (!inFood.first == 1) {
+  			if (this.doNotReinitThePanel == false) {
+    			this.setIndex(1);
     		}
-    	}
-    	if (this.doNotReinitThePanel == true) {
-   			this.doNotReinitThePanel = false;
-    	}
-    },
-    addSettingsPanel: function() {
-    	// hide food selection buttons
-    	this.$.buttonPreviousFood.hide();
+  		}
+  	}
+  	if (this.doNotReinitThePanel == true) {
+ 			this.doNotReinitThePanel = false;
+  	}
+  },
+  addSettingsPanel: function() {
+  	// hide food selection buttons
+  	this.$.buttonPreviousFood.hide();
+	this.$.buttonNextFood.hide();
+  	// set current canteen
+	this.$.settingsPanel.setSelectedCanteenKey(CanteenModel.getCanteen().key);
+  	this.$.contentPanels.setIndex(1);
+	if (AppModel.getExistsSmallScreen()) {
+  		this.setIndex(1);
+  	}
+  	this.isSettingsVisible = true;
+  },
+  canteenSelected: function() {
+  // hide food selection buttons
+  	this.$.buttonPreviousFood.hide();
+	this.$.buttonNextFood.hide();
+  	// set current canteen
+	this.$.canteenPanel.setSelectedCanteen(CanteenModel.getCanteen());
+  	this.$.contentPanels.setIndex(2);
+	if (AppModel.getExistsSmallScreen()) {
+  		this.setIndex(1);
+  	}
+  	this.isSettingsVisible = false;
+  },
+  cleanContentPanel: function() {
+  	if (AppModel.getExistsSmallScreen()) {
+		this.$.buttonPreviousFood.show();
+		this.$.buttonNextFood.show();
+	} else {
+		this.$.buttonPreviousFood.hide();
 		this.$.buttonNextFood.hide();
-    	// set current canteen
-		this.$.settingsPanel.setSelectedCanteenKey(CanteenModel.getCanteen().key);
-    	this.$.contentPanels.setIndex(1);
-		if (AppModel.getExistsSmallScreen()) {
-    		this.setIndex(1);
-    	}
-    	this.isSettingsVisible = true;
-    },
-    canteenSelected: function() {
-    // hide food selection buttons
-    	this.$.buttonPreviousFood.hide();
-		this.$.buttonNextFood.hide();
-    	// set current canteen
-		this.$.canteenPanel.setSelectedCanteen(CanteenModel.getCanteen());
-    	this.$.contentPanels.setIndex(2);
-		if (AppModel.getExistsSmallScreen()) {
-    		this.setIndex(1);
-    	}
-    	this.isSettingsVisible = false;
-    },
-    cleanContentPanel: function() {
-    	if (AppModel.getExistsSmallScreen()) {
-			this.$.buttonPreviousFood.show();
-			this.$.buttonNextFood.show();
-		} else {
-			this.$.buttonPreviousFood.hide();
-			this.$.buttonNextFood.hide();
-		}
-		if (!AppModel.getIsAndroid()) {
-			this.$.buttonShare.hide();
-		}
-    	this.$.contentPanels.setIndex(0);
-    	if (!AppModel.getExistsSmallScreen()) {
-    		this.setIndex(0);
-    	}
-    },
-    formatDate: function(date) {
-		return DateModel.formatDate(date);
-    },
-    updateCanteen: function(inSender) {
-		// set canteen name
-		var canteenKey = inSender.selectedCanteenKey;
-		CanteenModel.setCanteenKey(canteenKey);
-		// set flag "do not reinitialize the panel"
-		// the current settings panel should be activated/visible
-		this.doNotReinitThePanel = true;
-		// get data from service for new canteen
-		enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());
-    },
-    buttonPreviousDate: function() {
-    	this.cleanContentPanel();
-    	enyo.asyncMethod(this, "asyncCallDate", DateModel.getPreviousDate());
-    },
-    buttonHomeDate: function() {
-    	this.cleanContentPanel();
-    	DateModel.initialize();
-    	enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());
-    },
-    buttonNextDate: function() {
-    	this.cleanContentPanel();
-    	enyo.asyncMethod(this, "asyncCallDate", DateModel.getNextDate());
-    },
-    buttonPreviousFood: function() {
-    	this.cleanContentPanel();
-        var foodEntry =  FoodModel.getPreviousFood();
-    	this.$.food.setFood(foodEntry);
-    },
-    buttonNextFood: function() {
-    	this.cleanContentPanel();
-    	var foodEntry = FoodModel.getNextFood();
-    	this.$.food.setFood(foodEntry);
-    },
-    buttonBack: function() {
-    	if (AppModel.getExistsSmallScreen()) {
-    		this.cleanContentPanel();
+	}
+	if (!AppModel.getIsAndroid()) {
+		this.$.buttonShare.hide();
+	}
+  	this.$.contentPanels.setIndex(0);
+  	if (!AppModel.getExistsSmallScreen()) {
+  		this.setIndex(0);
+  	}
+  },
+  formatDate: function(date) {
+	return DateModel.formatDate(date);
+  },
+  updateCanteen: function(inSender) {
+	// set canteen name
+	var canteenKey = inSender.selectedCanteenKey;
+	CanteenModel.setCanteenKey(canteenKey);
+	// set flag "do not reinitialize the panel"
+	// the current settings panel should be activated/visible
+	this.doNotReinitThePanel = true;
+	// get data from service for new canteen
+	enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());
+  },
+  buttonPreviousDate: function() {
+  	this.cleanContentPanel();
+  	enyo.asyncMethod(this, "asyncCallDate", DateModel.getPreviousDate());
+  },
+  buttonHomeDate: function() {
+  	this.cleanContentPanel();
+  	DateModel.initialize();
+  	enyo.asyncMethod(this, "asyncCallDate", DateModel.getCurrentDate());
+  },
+  buttonNextDate: function() {
+  	this.cleanContentPanel();
+  	enyo.asyncMethod(this, "asyncCallDate", DateModel.getNextDate());
+  },
+  buttonPreviousFood: function() {
+  	this.cleanContentPanel();
+      var foodEntry =  FoodModel.getPreviousFood();
+  	this.$.food.setFood(foodEntry);
+  },
+  buttonNextFood: function() {
+  	this.cleanContentPanel();
+  	var foodEntry = FoodModel.getNextFood();
+  	this.$.food.setFood(foodEntry);
+  },
+  buttonBack: function() {
+  	if (AppModel.getExistsSmallScreen()) {
+  		this.cleanContentPanel();
 			this.setIndex(0);
 		}
+	},
+	backOnViewFood: function()  {
+		this.buttonBack();
 	},
 	backButtonHandler: function(inSender, inEvent) {
 		if (AppModel.getIsAndroid()) {

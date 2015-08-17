@@ -6,12 +6,13 @@ enyo.kind({
 	kind: "Panels",
 	realtimeFit: true,
 	classes: "enyo-border-box",
+	modus: "unlocked",
 	events: {
 		onBack:""
 	},
 	components: [
 		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
-			{kind: "FittableRows", name: "foodContent", ondragover: "handleOnDragEvent", centered: true, components: [
+			{kind: "FittableRows", name: "foodContent", ondragover: "handleOnDragEvent", ondown: "unlock", centered: true, components: [
 				{name: "foodname", components: [
 					{name: "fooddate"},
 					{name: "foodtitle"},
@@ -90,8 +91,12 @@ enyo.kind({
 		this.inherited(arguments);
 		this.zoomed = 0;
 	},
+	unlock: function() {
+		this.modus = "unlocked";
+	},
 	setFood: function(inFood) {
 		if (AppModel.getExistsSmallScreen()) {
+			this.unlock();
 			this.$.foodPictureWrapper.addRemoveClass("small_screen", true);
 		} else {
 			this.$.foodPictureWrapper.addRemoveClass("small_screen", false);
@@ -152,7 +157,10 @@ enyo.kind({
 		if (event.srcEvent.type == "touchmove") {
 			if (event.horizontal) {
 				if (AppModel.getExistsSmallScreen()) {
-					this.doBack();
+					if (this.modus == "unlocked") {
+						this.modus = "locked";
+						this.doBack();
+					}
 				}
 			}
 		}
