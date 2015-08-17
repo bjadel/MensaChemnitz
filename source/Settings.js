@@ -6,13 +6,14 @@ enyo.kind({
 	kind: "Panels",
 	realtimeFit: true,
 	classes: "enyo-border-box settings-panel",
+	modus: "unlocked",
 	events: {
 		onSelect: "",
 		onBack: ""
 	},
 	selectedCanteenKey: "rh",
 	components: [
-		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", ondragover: "handleOnDragEvent", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
+		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", ondragover: "handleOnDragEvent", ondown: "unlock", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
 			{kind: "FittableRows", classes: "settings-panel-content", centered: true, components: [
 				{name: "settingsTitle", content: $L('Settings'), tag: "h1"},
 				{kind: "onyx.Groupbox", style: "margin-top: 10px;", components: [
@@ -86,6 +87,9 @@ enyo.kind({
 		this.$.fbContent.setAttribute("href", "#");
 		this.$.fbContent.setContent($L('Facebook'));
 	},
+	unlock: function() {
+		this.modus = "unlocked";
+	},
 	rendered: function() {
 		this.inherited(arguments);
 	},
@@ -98,6 +102,7 @@ enyo.kind({
 		}
 	},
 	setSelectedCanteenKey: function(canteenKey) {
+		this.unlock();
 		this.selectedCanteenKey = canteenKey;
 		// set settings content
 		if (this.selectedCanteenKey == ReichenhainerCanteen.key) {
@@ -126,7 +131,10 @@ enyo.kind({
 		if (event.srcEvent.type == "touchmove") {
 			if (event.horizontal) {
 				if (AppModel.getExistsSmallScreen()) {
-					this.doBack();
+					if (this.modus == "unlocked") {
+						this.modus = "locked";
+						this.doBack();
+					}
 				}
 			}
 		}

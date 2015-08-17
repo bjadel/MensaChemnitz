@@ -6,12 +6,13 @@ enyo.kind({
 	kind: "Panels",
 	realtimeFit: true,
 	classes: "enyo-border-box canteen-panel",
+	modus: "unlocked",
 	events: {
 		onBack:""
 	},
 	selectedCanteen: "",
 	components: [
-		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", ondragover: "handleOnDragEvent", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
+		{kind: "Scroller", fit: true, touch: true, strategyKind: "TouchScrollStrategy", ondragover: "handleOnDragEvent", ondown: "unlock", vertical: "auto", horizontal: "hidden", dragDuringGesture: true, classes: "scroller-sample-scroller enyo-fit", components: [
 			{kind: "FittableRows", classes: "canteen-panel-content", centered: true, components: [
 				{name: "canteenDescription", components: [
 					{name: "canteenName"},
@@ -31,10 +32,14 @@ enyo.kind({
 		AppModel.initialize();
 		AppModel.setExistsSmallScreen();
 	},
+	unlock: function() {
+		this.modus = "unlocked";
+	},
 	rendered: function() {
 		this.inherited(arguments);
 	},
 	setSelectedCanteen: function(canteen) {
+		this.unlock();
 		this.selectedCanteen = canteen;
 		this.$.canteenName.setContent(this.selectedCanteen.name);
 		this.$.businessHoursLecturePeriod.setContent(this.selectedCanteen.businessHoursLecturePeriod);
@@ -44,7 +49,10 @@ enyo.kind({
 		if (event.srcEvent.type == "touchmove") {
 			if (event.horizontal) {
 				if (AppModel.getExistsSmallScreen()) {
-					this.doBack();
+					if (this.modus == "unlocked") {
+						this.modus = "locked";
+						this.doBack();
+					}
 				}
 			}
 		}
