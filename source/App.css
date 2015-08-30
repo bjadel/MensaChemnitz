@@ -358,6 +358,10 @@ div.settings-panel-content {
 }
 
 /* canteen panel */
+.legend {
+	font-weight: bold;
+}
+
 div.canteen-panel {
 	background: url(../assets/bgwood.jpg);
 	z-index: 1;
