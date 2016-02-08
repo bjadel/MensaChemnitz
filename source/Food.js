@@ -155,7 +155,7 @@ enyo.kind({
 	},
 	handleOnDragEvent: function(sender, event) {
 		if (event.srcEvent.type == "touchmove") {
-			if (event.horizontal) {
+			if (event.horizontal && event.xDirection > 0) {
 				if (AppModel.getExistsSmallScreen()) {
 					if (this.modus == "unlocked") {
 						this.modus = "locked";
