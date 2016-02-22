@@ -26,8 +26,13 @@ nw:
 	@/bin/bash -c "echo Make nw; \
 	cp -rf deploy/web deploy/nw; \
 	cp -f  package_nw.json deploy/nw/package.json; \
-	mkdir deploy/linux64; \
-	nwbuild --cacheDir=/tmp -p linux64 -v 0.12.3 -o deploy/linux64 deploy/nw;"
+	mkdir deploy/platforms; \
+	nwbuild --cacheDir=/tmp -p linux64 -v 0.12.3 -o deploy/platforms deploy/nw; \
+	nwbuild --cacheDir=/tmp -p linux32 -v 0.12.3 -o deploy/platforms deploy/nw; \
+	nwbuild --cacheDir=/tmp -p win32 -v 0.12.3 -o deploy/platforms deploy/nw; \
+	nwbuild --cacheDir=/tmp -p win64 -v 0.12.3 -o deploy/platforms deploy/nw; \
+	nwbuild --cacheDir=/tmp -p osx32 -v 0.12.3 -o deploy/platforms deploy/nw; \
+	nwbuild --cacheDir=/tmp -p osx64 -v 0.12.3 -o deploy/platforms deploy/nw;"
 
 all: web bb10 android
 
