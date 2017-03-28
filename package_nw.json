@@ -1,9 +1,0 @@
-{
-  "name": "Mensa Chemnitz",
-  "main": "index.html",
-  "version": "1.1.0-1",
-  "window": {
-        "frame": true,
-        "toolbar": false
-  }
-}
